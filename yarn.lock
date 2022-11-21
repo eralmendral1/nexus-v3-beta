@@ -3619,6 +3619,15 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+nestjs-pusher@^0.0.12:
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/nestjs-pusher/-/nestjs-pusher-0.0.12.tgz#c796e3cde0b0970e8c31a7fbc314e56754aa1f21"
+  integrity sha512-j4Xor8mJpPsZoaPPAYqUtxq4aLGCgZtPAOT2zKZ1udk3LZ9duTkBoLMK820+yQYcHJE7HssDSYXKri2FbDOkhQ==
+  dependencies:
+    reflect-metadata "^0.1.13"
+    rimraf "^3.0.2"
+    rxjs "^7.5.5"
+
 nestjs-twilio@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/nestjs-twilio/-/nestjs-twilio-3.2.0.tgz#0213fd94dce46ac19c6fc82739d2397d1fbc49ae"
