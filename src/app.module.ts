@@ -29,6 +29,7 @@ import { PrismaModule } from './prisma/prisma.module';
             enabled: true
         }, true),
 
+        PrismaModule,
 
     ],
     controllers: [AppController],
