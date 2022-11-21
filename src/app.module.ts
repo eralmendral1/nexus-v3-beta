@@ -4,11 +4,11 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { TwilioModule } from 'nestjs-twilio'
 import { PusherModule } from 'nestjs-pusher'
+import { PrismaModule } from './prisma/prisma.module';
 
 
 @Module({
     imports: [
-
         // Config Module
         ConfigModule.forRoot(),
 
@@ -27,7 +27,8 @@ import { PusherModule } from 'nestjs-pusher'
         }, {
             limit: 4000, //4mb
             enabled: true
-        }, true)
+        }, true),
+
 
     ],
     controllers: [AppController],
