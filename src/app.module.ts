@@ -10,6 +10,8 @@ import { PassportModule } from '@nestjs/passport'
 import { AzureADStrategy } from './azure-ad.guard'
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ItemsModule } from './items/items.module';
+import { PolicyCategoriesModule } from './policy-categories/policy-categories.module';
 
 @Module({
     imports: [
@@ -38,7 +40,9 @@ import { UsersModule } from './users/users.module';
         AuthModule,
         
         ClientsModule,
-        UsersModule
+        UsersModule,
+        ItemsModule,
+        PolicyCategoriesModule
     ],
     controllers: [AppController],
     providers: [AppService, AzureADStrategy],
