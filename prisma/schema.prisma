@@ -8,23 +8,36 @@ datasource db {
 }
 
 model Client {
-    id           Int      @id
-    masterClient Int?
-    name         String
-    email        String?
-    disabled     Boolean  @default(false)
-    address1     String?
-    address2     String?
-    city         String?
-    state        String?
-    zip          String?
-    phone1       String?
-    phone2       String?
-    fax          String?
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @default(now())
+    id             Int              @id
+    masterClient   Int?
+    name           String
+    email          String?
+    disabled       Boolean          @default(false)
+    address1       String?
+    address2       String?
+    city           String?
+    state          String?
+    zip            String?
+    phone1         String?
+    phone2         String?
+    fax            String?
+    createdAt      DateTime         @default(now())
+    updatedAt      DateTime         @default(now())
+    PolicyCategory PolicyCategory[]
 
     @@map("clients")
+}
+
+model PolicyCategory {
+    id        Int    @id @default(autoincrement())
+    name      String
+    client_id Int
+    client    Client @relation(fields: [client_id], references: [id])
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    @@map("policy_categories")
 }
 
 model User {
@@ -49,4 +62,38 @@ model User {
     deletedAt               DateTime?
 
     @@map("users")
+}
+
+model Item {
+    id Int @id @default(autoincrement())
+
+    client_id              Int
+    internal_name          String
+    external_name          String
+    self_init              Boolean   @default(false)
+    channel_name           String
+    channel_id             String
+    self_init_workflow     String?
+    workflow_id            String
+    workflow_name          String?
+    template               String
+    icon_class             String?
+    background_color       String?
+    notification_tone      String?
+    priority               Int?
+    exclude                Boolean?
+    timeout                Int?
+    auto_dial              Boolean   @default(true)
+    passthrough_url        String?
+    pending_warning_limit  Int?
+    pending_danger_limit   Int?
+    accepted_warning_limit Int?
+    accepted_danger_limit  Int?
+    wrapup_time            Int?
+    createdBy              String?
+    createdAt              DateTime  @default(now())
+    updatedAt              DateTime  @default(now())
+    deletedAt              DateTime?
+
+    @@map("items")
 }
