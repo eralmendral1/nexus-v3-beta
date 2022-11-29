@@ -13,6 +13,7 @@ import { UsersModule } from './users/users.module';
 import { ItemsModule } from './items/items.module';
 import { PolicyCategoriesModule } from './policy-categories/policy-categories.module';
 import { PoliciesModule } from './policies/policies.module';
+import { ContactsModule } from './contacts/contacts.module';
 
 @Module({
     imports: [
@@ -44,7 +45,8 @@ import { PoliciesModule } from './policies/policies.module';
         UsersModule,
         ItemsModule,
         PolicyCategoriesModule,
-        PoliciesModule
+        PoliciesModule,
+        ContactsModule
     ],
     controllers: [AppController],
     providers: [AppService, AzureADStrategy],
