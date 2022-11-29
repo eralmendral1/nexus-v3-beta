@@ -7,7 +7,7 @@ import { AccessTokenGuard } from '../auth/auth.guard'
 
 @Controller('policies')
 @ApiTags('Client Policies')
-// @UseGuards(AccessTokenGuard)
+@UseGuards(AccessTokenGuard)
 export class PoliciesController {
   constructor(private readonly policiesService: PoliciesService) {}
 
