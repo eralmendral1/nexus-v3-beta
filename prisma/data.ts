@@ -209,7 +209,7 @@ export const clientsData = [
     { id: 38, name: "JPO Appliance" },
     { id: 67, name: "JPO Corp" },
     { id: 9, name: "Flamngo Appliance" },
-    { id: 95, name: "AT Appliance Sacramento" }
+    { id: 94, name: "AT Appliance Sacramento" }
 ]
 
 export const contactsData = [
@@ -257,5 +257,49 @@ export const contactsData = [
         "id": 24,
         "number": "+17143644103",
         "notes": "Testa"
+    }
+]
+export const destinationNumberData =  [
+    {
+        "id": 1,
+        "client_id": 38,
+        "number": "+639083258184",
+        "extension": "",
+        "label": "Eric Dev 2",
+    },
+    {
+        "id": 2,
+        "client_id": 38,
+        "number": "+19282931380",
+        "extension": "www1234",
+        "label": "+19282931380www1234",
+    },
+    {
+        "id": 3,
+        "client_id": 67,
+        "number": "+17147866856",
+        "extension": "",
+        "label": "Jeff Direct",
+    },
+    {
+        "id": 4,
+        "client_id": 67,
+        "number": "+19282931380",
+        "extension": "",
+        "label": "Jeff Cell",
+    },
+    {
+        "id": 5,
+        "client_id": 67,
+        "number": "+17148495355",
+        "extension": "www5640",
+        "label": "Jeff Office",
+    },
+    {
+        "id": 6,
+        "client_id": 94,
+        "number": "+19162464400",
+        "extension": "www9",
+        "label": "AT Sacramento Office",
     }
 ]

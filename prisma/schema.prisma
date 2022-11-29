@@ -8,24 +8,41 @@ datasource db {
 }
 
 model Client {
-    id             Int              @id
-    masterClient   Int?
-    name           String
-    email          String?
-    disabled       Boolean          @default(false)
-    address1       String?
-    address2       String?
-    city           String?
-    state          String?
-    zip            String?
-    phone1         String?
-    phone2         String?
-    fax            String?
-    createdAt      DateTime         @default(now())
-    updatedAt      DateTime         @default(now())
-    PolicyCategory PolicyCategory[]
+    id                Int                 @id
+    masterClient      Int?
+    name              String
+    email             String?
+    disabled          Boolean             @default(false)
+    address1          String?
+    address2          String?
+    city              String?
+    state             String?
+    zip               String?
+    phone1            String?
+    phone2            String?
+    fax               String?
+    createdAt         DateTime            @default(now())
+    updatedAt         DateTime            @default(now())
+    PolicyCategory    PolicyCategory[]
+    DestinationNumber DestinationNumber[]
 
     @@map("clients")
+}
+
+model DestinationNumber {
+    id Int @id @default(autoincrement())
+
+    client_id Int
+    client    Client @relation(fields: [client_id], references: [id])
+
+    number    String
+    extension String?
+    label     String
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    @@map("destination_numbers")
 }
 
 model PolicyCategory {

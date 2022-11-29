@@ -1,10 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
-import { policiesData, policyCategoryData, clientsData, contactsData } from './data'
+import { policiesData, policyCategoryData, clientsData, contactsData, destinationNumberData } from './data'
 
 
 async function main() {
     seedClient()
+    seedDestinationNumbers()
     seedContacts()
     setTimeout(() => {
         seedPolicies()
@@ -16,6 +17,14 @@ function seedClient() {
     clientsData.forEach(async (data) => {
         await prisma.client.upsert({ where: { id: data.id }, update: {}, create: data })
     })
+}
+
+function seedDestinationNumbers() {
+    setTimeout(() => {
+        destinationNumberData.forEach(async (data) => {
+            await prisma.destinationNumber.upsert({ where: { id: data.id }, update: {}, create: data })
+        })
+    }, 3000)
 }
 
 function seedPolicies() {
