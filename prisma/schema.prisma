@@ -110,3 +110,15 @@ model Item {
 
     @@map("items")
 }
+
+model Contact {
+    id Int @id @default(autoincrement())
+
+    number String
+    notes  String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @default(now())
+
+    @@map("contacts")
+}

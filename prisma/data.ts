@@ -211,3 +211,51 @@ export const clientsData = [
     { id: 9, name: "Flamngo Appliance" },
     { id: 95, name: "AT Appliance Sacramento" }
 ]
+
+export const contactsData = [
+    {
+        "id": 12,
+        "number": "+171436441013",
+        "notes": "zz"
+    },
+    {
+        "id": 13,
+        "number": "+171436441013",
+        "notes": "test12345"
+    },
+    {
+        "id": 14,
+        "number": "+1714364410133",
+        "notes": "test123"
+    },
+    {
+        "id": 18,
+        "number": "++171436441013",
+        "notes": "test123"
+    },
+    {
+        "id": 19,
+        "number": "+171436441013",
+        "notes": "test12345"
+    },
+    {
+        "id": 20,
+        "number": "+1714364410135",
+        "notes": "test12345"
+    },
+    {
+        "id": 21,
+        "number": "+1714364416",
+        "notes": "test123451111"
+    },
+    {
+        "id": 22,
+        "number": "+171436441667",
+        "notes": "test123451111"
+    },
+    {
+        "id": 24,
+        "number": "+17143644103",
+        "notes": "Testa"
+    }
+]
