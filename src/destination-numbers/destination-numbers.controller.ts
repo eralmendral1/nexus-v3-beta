@@ -7,7 +7,7 @@ import { UpdateDestinationNumberDto } from './dto/update-destination-number.dto'
 
 @Controller('destination-numbers')
 @ApiTags('Destination Numbers')
-// @UseGuards(AccessTokenGuard)
+@UseGuards(AccessTokenGuard)
 export class DestinationNumbersController {
   constructor(private readonly destinationNumbersService: DestinationNumbersService) {}
 
