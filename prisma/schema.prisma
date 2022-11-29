@@ -1,19 +1,52 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
+model Client {
+    id           Int      @id
+    masterClient Int?
+    name         String
+    email        String?
+    disabled     Boolean  @default(false)
+    address1     String?
+    address2     String?
+    city         String?
+    state        String?
+    zip          String?
+    phone1       String?
+    phone2       String?
+    fax          String?
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @default(now())
 
-model Test {
-    id   Int   @id
-    name String
+    @@map("clients")
+}
 
-     @@map(name: "tests")
+model User {
+    id                      Int       @id @default(autoincrement())
+    callcenter_id           Int?
+    sid                     String?
+    name                    String
+    email                   String
+    email_verified_at       DateTime?
+    avatar                  String?
+    password                String?
+    admin                   Boolean   @default(false)
+    external_agent          Boolean   @default(false)
+    skills                  String?
+    timezone                String?
+    block_reject            Boolean   @default(true)
+    presence                String?
+    reservation_passthrough String?
+    remember_token          String?
+    createdAt               DateTime  @default(now())
+    updatedAt               DateTime  @default(now())
+    deletedAt               DateTime?
+
+    @@map("users")
 }

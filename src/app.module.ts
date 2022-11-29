@@ -5,13 +5,17 @@ import { AppService } from './app.service'
 import { TwilioModule } from 'nestjs-twilio'
 import { PusherModule } from 'nestjs-pusher'
 import { PrismaModule } from './prisma/prisma.module';
-
+import { ClientsModule } from './clients/clients.module';
+import { PassportModule } from '@nestjs/passport'
+import { AzureADStrategy } from './azure-ad.guard'
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
     imports: [
         // Config Module
-        ConfigModule.forRoot(),
-
+        ConfigModule.forRoot({ isGlobal: true }),
+        
         // Twilio Module
         TwilioModule.forRoot({
             accountSid: process.env.TWILIO_ACCOUNT_SID,
@@ -30,10 +34,14 @@ import { PrismaModule } from './prisma/prisma.module';
         }, true),
 
         PrismaModule,
-
+        PassportModule,
+        AuthModule,
+        
+        ClientsModule,
+        UsersModule
     ],
     controllers: [AppController],
-    providers: [AppService],
+    providers: [AppService, AzureADStrategy],
 })
 
 export class AppModule { }

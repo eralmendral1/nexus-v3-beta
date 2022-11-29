@@ -1,12 +1,7 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, UseGuards } from '@nestjs/common'
+import { AppService } from './app.service'
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
-  getHello(): any {
-    return this.appService.testTwilioSetup();
-  }
+    constructor(private readonly appService: AppService) { }
 }
