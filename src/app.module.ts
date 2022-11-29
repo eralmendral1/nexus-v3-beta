@@ -14,6 +14,7 @@ import { ItemsModule } from './items/items.module';
 import { PolicyCategoriesModule } from './policy-categories/policy-categories.module';
 import { PoliciesModule } from './policies/policies.module';
 import { ContactsModule } from './contacts/contacts.module';
+import { DestinationNumbersModule } from './destination-numbers/destination-numbers.module';
 
 @Module({
     imports: [
@@ -46,7 +47,8 @@ import { ContactsModule } from './contacts/contacts.module';
         ItemsModule,
         PolicyCategoriesModule,
         PoliciesModule,
-        ContactsModule
+        ContactsModule,
+        DestinationNumbersModule
     ],
     controllers: [AppController],
     providers: [AppService, AzureADStrategy],
