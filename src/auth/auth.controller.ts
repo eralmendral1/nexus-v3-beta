@@ -6,19 +6,36 @@ import {
     HttpStatus,
     Post,
     Req,
+    Res,
     UseGuards
 } from '@nestjs/common'
-import { Request } from 'express'
+import { Request, Response } from 'express'
 import { CreateUserDto } from 'src/users/dto/create-user.dto'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
 import { AccessTokenGuard, RefreshTokenGuard } from './auth.guard'
 import { ApiTags } from '@nestjs/swagger'
+import { PusherService } from 'nestjs-pusher'
 
 @Controller('auth')
 @ApiTags('Auth')
 export class AuthController {
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private pusherService: PusherService) { }
+
+    @Post('/pusher')
+    pusherAuth(@Req() req: Request, @Res() res: Response) {
+        const socketId = req.body.socket_id
+
+        const user = {
+            user_id: "1",
+            user_info: {
+                name: "Neo Anderson"
+            }
+        }
+
+        const authResponse = this.pusherService.authenticate(socketId, 'nexus-channel', user)
+        res.send(authResponse)
+    }
 
     @Post('signup')
     signup(@Body() createUserDto: CreateUserDto) {
@@ -39,9 +56,9 @@ export class AuthController {
     @UseGuards(RefreshTokenGuard)
     @Get('refresh')
     refreshTokens(@Req() req: Request) {
-      const userId = req.user['sub'];
-      const refreshToken = req.user['refreshToken'];
-      return this.authService.refreshTokens(userId, refreshToken);
+        const userId = req.user['sub']
+        const refreshToken = req.user['refreshToken']
+        return this.authService.refreshTokens(userId, refreshToken)
     }
 
     // @Get()
