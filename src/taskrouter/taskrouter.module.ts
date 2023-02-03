@@ -5,9 +5,11 @@ import { ActivitiesModule } from './activities/activities.module';
 import { TaskrouterService } from './taskrouter.service';
 import { ChannelsModule } from './channels/channels.module';
 import { TasksModule } from './tasks/tasks.module';
+import { TaskrouterController } from './taskrouter.controller';
 
 @Module({
     imports: [ReservationsModule, WorkflowsModule, ActivitiesModule, ChannelsModule, TasksModule],
-    providers: [TaskrouterService]
+    providers: [TaskrouterService],
+    controllers: [TaskrouterController]
 })
 export class TaskrouterModule { }
