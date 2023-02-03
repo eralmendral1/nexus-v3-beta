@@ -5,6 +5,7 @@ import { UpdateReservationStatusDto } from './dto/update-reservation-status.dto'
 
 @Controller('taskrouter/reservations')
 export class ReservationsController {
+
     constructor(private reservationService: ReservationsService) { }
 
     @Get('pending')
@@ -12,24 +13,28 @@ export class ReservationsController {
         return this.reservationService.getMyPendingReservations()
     }
 
+
     @Get('accepted')
     getAcceptedReservations(): Reservation[] {
         return this.reservationService.getMyAcceptedReservations()
     }
+
 
     @Get(':sid/tasks/:taskSid')
     getReservation(@Param() params): Reservation {
         return this.reservationService.getReservation(params.sid, params.taskSid)
     }
 
+
     @Get(':workerSid/accepted')
     getWorkerAcceptedReservations(@Param() params): Reservation[] {
         return this.reservationService.getWorkerReservations(params.workerSid, 'accepted')
     }
 
+
     @Post('status')
     updateReservationStatus(@Body() updateReservationStatusDto: UpdateReservationStatusDto): Reservation {
         return this.reservationService.updateReservationStatus(updateReservationStatusDto)
     }
-    
+
 }
