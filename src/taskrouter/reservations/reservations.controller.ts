@@ -17,14 +17,19 @@ export class ReservationsController {
         return this.reservationService.getMyAcceptedReservations()
     }
 
-
     @Get(':sid/tasks/:taskSid')
     getReservation(@Param() params): Reservation {
         return this.reservationService.getReservation(params.sid, params.taskSid)
+    }
+
+    @Get(':workerSid/accepted')
+    getWorkerAcceptedReservations(@Param() params): Reservation[] {
+        return this.reservationService.getWorkerReservations(params.workerSid, 'accepted')
     }
 
     @Post('status')
     updateReservationStatus(@Body() updateReservationStatusDto: UpdateReservationStatusDto): Reservation {
         return this.reservationService.updateReservationStatus(updateReservationStatusDto)
     }
+    
 }

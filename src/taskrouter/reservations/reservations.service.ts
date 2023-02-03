@@ -11,7 +11,6 @@ export class ReservationsService extends TaskrouterService {
         return this.twilioClient.workers(workerSid).reservations.list({ "reservationStatus": "pending" })
     }
 
-
     getMyAcceptedReservations(): Reservation[] {
         const workerSid = 'WK77b37617f41db2cdd2e4014f41d08055'
         return this.twilioClient.workers(workerSid).reservations.list({ "reservationStatus": "accepted" })
@@ -21,7 +20,11 @@ export class ReservationsService extends TaskrouterService {
         return this.twilioClient.tasks(taskSid).reservations(reservationSid).fetch()
     }
 
-    updateReservationStatus( { taskSid , reservationSid, status } : UpdateReservationStatusDto): Reservation {
+    getWorkerReservations(workerSid: string, status: string): Reservation[] {
+        return this.twilioClient.workers(workerSid).reservations.list({ "reservationStatus": status })
+    }
+
+    updateReservationStatus({ taskSid, reservationSid, status }: UpdateReservationStatusDto): Reservation {
         return this.twilioClient.tasks(taskSid).reservations(reservationSid).update({ reservationStatus: status })
     }
 }

@@ -68,3 +68,28 @@ export type Reservation = TaskRouterResource & {
         "workspace": string
     }
 }
+
+export type Task = TaskRouterResource & {
+    "age": number,
+    "assignmenStatus": string,
+    "attributes": string,
+    "addons": string,
+    "taskQueueEnteredDate": string,
+    "priority": number,
+    "reason"?: string,
+    "taskQueueSid": string,
+    "taskQueueFriendlyName": string,
+    "taskChannelSid": string,
+    "taskChannelUniqueName": string,
+    "timeout": number,
+    "workflowSid": string,
+    "workflowFriendlyName": string,
+    "links": TaskLinks
+}
+
+export type TaskLinks = {
+    "reservations": string,
+    "task_queue": string,
+    "workspace": string,
+    "workflow": string
+}
