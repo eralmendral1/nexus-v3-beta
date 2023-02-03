@@ -4,8 +4,7 @@ export type TaskRouterResource = {
     "dateUpdated": string,
     "sid": string,
     "url": string,
-    "workspaceSid": string,
-    "links": LinkWorkspace
+    "workspaceSid": string
 }
 
 export type LinkWorkspace = {
@@ -34,7 +33,6 @@ export type WorkflowLinks = {
 }
 
 
-
 export type Activity = {
     "accountSid": string,
     "available": boolean,
@@ -55,6 +53,7 @@ export type TaskChannel = TaskRouterResource & {
     "friendlyName": string,
     "uniqueName": string,
     "channelOptimizedRouting": boolean,
+    "links": LinkWorkspace
 }
 
 export type Reservation = TaskRouterResource & {
@@ -62,11 +61,13 @@ export type Reservation = TaskRouterResource & {
     "taskSid": string,
     "workerName": string,
     "workerSid": string,
-    "links": {
-        "task": string,
-        "worker": string,
-        "workspace": string
-    }
+    "links": ReservationLinks
+}
+
+type ReservationLinks = {
+    "task": string,
+    "worker": string,
+    "workspace": string
 }
 
 export type Task = TaskRouterResource & {
@@ -87,7 +88,7 @@ export type Task = TaskRouterResource & {
     "links": TaskLinks
 }
 
-export type TaskLinks = {
+type TaskLinks = {
     "reservations": string,
     "task_queue": string,
     "workspace": string,

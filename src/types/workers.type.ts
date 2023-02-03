@@ -52,4 +52,12 @@ type ActivityDuration = {
     "total": number
 }
 
-
+export type WorkerChannel = TaskRouterResource & {
+    "assignedTasks": number,
+    "available": boolean,
+    "availableCapacityPercentage": number,
+    "configuredCapacity": number,
+    "taskChannelSid": string,
+    "taskChannelUniqueName": string,
+    "workerSid": string
+}
