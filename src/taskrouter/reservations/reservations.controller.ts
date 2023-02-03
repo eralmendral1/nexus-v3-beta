@@ -9,13 +9,13 @@ export class ReservationsController {
     constructor(private reservationService: ReservationsService) { }
 
     @Get('pending')
-    getPendingReservations(): Reservation[] {
+    getMyPendingReservations(): Reservation[] {
         return this.reservationService.getMyPendingReservations()
     }
 
 
     @Get('accepted')
-    getAcceptedReservations(): Reservation[] {
+    getMyAcceptedReservations(): Reservation[] {
         return this.reservationService.getMyAcceptedReservations()
     }
 
@@ -24,13 +24,6 @@ export class ReservationsController {
     getReservation(@Param() params): Reservation {
         return this.reservationService.getReservation(params.sid, params.taskSid)
     }
-
-
-    @Get(':workerSid/accepted')
-    getWorkerAcceptedReservations(@Param() params): Reservation[] {
-        return this.reservationService.getWorkerReservations(params.workerSid, 'accepted')
-    }
-
 
     @Post('status')
     updateReservationStatus(@Body() updateReservationStatusDto: UpdateReservationStatusDto): Reservation {

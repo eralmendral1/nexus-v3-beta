@@ -20,10 +20,6 @@ export class ReservationsService extends TaskrouterService {
         return this.twilioClient.tasks(taskSid).reservations(reservationSid).fetch()
     }
 
-    getWorkerReservations(workerSid: string, status: string): Reservation[] {
-        return this.twilioClient.workers(workerSid).reservations.list({ "reservationStatus": status })
-    }
-
     updateReservationStatus({ taskSid, reservationSid, status }: UpdateReservationStatusDto): Reservation {
         return this.twilioClient.tasks(taskSid).reservations(reservationSid).update({ reservationStatus: status })
     }
