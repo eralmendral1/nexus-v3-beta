@@ -22,7 +22,4 @@ export class UpdateReservationStatusDto {
     activitySid ?: string
 }
 
-enum ReservationStatus {
-    accepted,
-    rejected
-}
+type ReservationStatus = 'accepted' | 'rejected'

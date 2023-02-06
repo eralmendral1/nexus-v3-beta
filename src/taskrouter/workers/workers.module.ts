@@ -8,6 +8,7 @@ import { ChannelsModule } from './channels/channels.module';
 @Module({
   providers: [WorkersService],
   controllers: [WorkersController],
-  imports: [StatisticsModule, ReservationsModule, ChannelsModule]
+  imports: [StatisticsModule, ReservationsModule, ChannelsModule],
+  exports: [WorkersService]
 })
 export class WorkersModule {}

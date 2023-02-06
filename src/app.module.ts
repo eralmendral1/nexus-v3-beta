@@ -17,6 +17,7 @@ import { TwilioModule } from './twilio/twilio.module'
 import { TasksModule } from './tasks/tasks.module';
 import { ChatModule } from './chat/chat.module';
 import { PusherModule } from './pusher/pusher.module';
+import { CapabilityModule } from './capability/capability.module';
 
 @Module({
     imports: [
@@ -53,7 +54,9 @@ import { PusherModule } from './pusher/pusher.module';
 
         ChatModule,
 
-        PusherModule
+        PusherModule,
+
+        CapabilityModule
     ],
     providers: [ AzureADStrategy],
 })
