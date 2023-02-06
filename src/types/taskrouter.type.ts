@@ -1,9 +1,6 @@
-export type TaskRouterResource = {
-    "accountSid": string,
-    "dateCreated": string,
-    "dateUpdated": string,
-    "sid": string,
-    "url": string,
+import { TwilioResource } from './twilio.type'
+
+export type TaskRouterResource = TwilioResource & {
     "workspaceSid": string
 }
 
