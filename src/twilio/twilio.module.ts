@@ -1,31 +1,32 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common'
-import { TWILIO_TASKROUTER, TWILIO_CONVERSATION } from './constants'
+import { TWILIO_CLIENT, TWILIO_TASKROUTER, TWILIO_CONVERSATION } from './constants'
 
 @Module({})
 export class TwilioModule {
     static forRoot(accountSid: string, authToken: string, workspace: string): DynamicModule {
-        
-        const twilioTaskrouter = require('twilio')(accountSid, authToken).taskrouter.v1.workspaces(workspace)
+            
+        const twilioClient = require('twilio')(accountSid, authToken)
+        const twilioClientProvider: Provider = {
+            provide: TWILIO_CLIENT,
+            useValue: twilioClient
+        }
 
-        const twilioProvider: Provider = {
+        const twilioTaskrouter = twilioClient.taskrouter.v1.workspaces(workspace)
+        const twilioTaskrouterProvider: Provider = {
             provide: TWILIO_TASKROUTER,
             useValue: twilioTaskrouter
         }
 
-        const twilioConversation = require('twilio')(accountSid, authToken).conversations.v1
-
+        const twilioConversation = twilioClient.conversations.v1
         const twilioConversationProvider: Provider = {
             provide: TWILIO_CONVERSATION,
             useValue: twilioConversation
         }
 
-
-
-
         return {
             module: TwilioModule,
-            providers: [twilioProvider, twilioConversationProvider],
-            exports: [twilioProvider, twilioConversationProvider],
+            providers: [twilioClientProvider, twilioTaskrouterProvider, twilioConversationProvider],
+            exports: [twilioClientProvider, twilioTaskrouterProvider, twilioConversationProvider],
             global: true
         }
     }
