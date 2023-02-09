@@ -22,7 +22,7 @@ model Client {
     phone2            String?
     fax               String?
     createdAt         DateTime            @default(now())
-    updatedAt         DateTime            @default(now())
+    updatedAt         DateTime            @updatedAt
     PolicyCategory    PolicyCategory[]
     DestinationNumber DestinationNumber[]
 
@@ -40,7 +40,7 @@ model DestinationNumber {
     label     String
 
     createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@map("destination_numbers")
 }
@@ -52,7 +52,7 @@ model PolicyCategory {
     client    Client @relation(fields: [client_id], references: [id])
 
     createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
     Policy    Policy[]
 
     @@map("policy_categories")
@@ -65,7 +65,7 @@ model Policy {
     category    PolicyCategory @relation(fields: [category_id], references: [id])
 
     createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@map("policies")
 }
@@ -88,10 +88,13 @@ model User {
     reservation_passthrough String?
     remember_token          String?
     createdAt               DateTime  @default(now())
-    updatedAt               DateTime  @default(now())
+    updatedAt               DateTime  @updatedAt
     deletedAt               DateTime?
 
     WorkerCapability WorkerCapability[]
+
+    trackers         UsersOnTrackers[]
+    trackerHistories TrackerHistory[]
 
     @@map("users")
 }
@@ -124,7 +127,7 @@ model Item {
     wrapup_time            Int?
     createdBy              String?
     createdAt              DateTime  @default(now())
-    updatedAt              DateTime  @default(now())
+    updatedAt              DateTime  @updatedAt
     deletedAt              DateTime?
 
     workerCapability WorkerCapability[]
@@ -139,24 +142,63 @@ model Contact {
     notes  String?
 
     createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     @@map("contacts")
 }
 
 model WorkerCapability {
-    id        Int @id @default(autoincrement())
+    id        Int      @id @default(autoincrement())
     worker_id Int
-    item_id Int
+    item_id   Int
     status    String
-    view_only Boolean @default(false)
+    view_only Boolean  @default(false)
     BillType  String?
     BillRate  String?
     createdAt DateTime @default(now())
-    updatedAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 
     user User @relation(fields: [worker_id], references: [id])
     item Item @relation(fields: [item_id], references: [id])
 
     @@map("worker_capabilities")
+}
+
+model Tracker {
+    id          Int      @id @default(autoincrement())
+    name        String
+    description String?
+    color       String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+
+    users UsersOnTrackers[]
+
+    @@map("trackers")
+}
+
+model TrackerHistory {
+    id Int @id @default(autoincrement())
+    user    User   @relation(fields: [user_id], references: [id])
+    user_id Int
+    type    String
+    worker_id Int?
+    meta_data String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("tracker_histories")
+}
+
+model UsersOnTrackers {
+    tracker    Tracker @relation(fields: [tracker_id], references: [id])
+    tracker_id Int
+
+    user    User @relation(fields: [user_id], references: [id])
+    user_id Int
+
+    assignedAt DateTime @default(now())
+
+    @@id([tracker_id, user_id])
+    @@map("tracker_user")
 }

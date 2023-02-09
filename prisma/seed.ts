@@ -12,7 +12,6 @@ async function main() {
     }, 3000)
 }
 
-
 function seedClient() {
     clientsData.forEach(async (data) => {
         await prisma.client.upsert({ where: { id: data.id }, update: {}, create: data })
