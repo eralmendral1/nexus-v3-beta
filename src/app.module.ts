@@ -19,6 +19,7 @@ import { ChatModule } from './chat/chat.module';
 import { PusherModule } from './pusher/pusher.module';
 import { CapabilityModule } from './capability/capability.module';
 import { TrackersModule } from './trackers/trackers.module';
+import { WidgetsModule } from './widgets/widgets.module';
 
 @Module({
     imports: [
@@ -59,7 +60,9 @@ import { TrackersModule } from './trackers/trackers.module';
 
         CapabilityModule,
 
-        TrackersModule
+        TrackersModule,
+
+        WidgetsModule
     ],
     providers: [ AzureADStrategy],
 })
