@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 import { TaskrouterService } from '../taskrouter/taskrouter.service'
 import { AddWorkerCapabilityDto } from './dto/add-worker-capability.dto'
-import { TWILIO_CLIENT } from '@/twilio/constants'
+import { TWILIO_TASKROUTER } from '@/twilio/constants'
 import { RemoveWorkerCapabilityDto } from './dto/remove-worker-capability.dto'
 import { UpdateWorkerCapabilityDto } from './dto/update-worker-capability.dto'
 import { WorkersService } from '../taskrouter/workers/workers.service'
@@ -12,7 +12,7 @@ import { RemoveWorkerItemsAttributesDto } from '../taskrouter/workers/dto/remove
 
 @Injectable()
 export class CapabilityService extends TaskrouterService {
-    constructor(@Inject(TWILIO_CLIENT) public readonly twilioTaskrouter, private prisma: PrismaService, private workerService: WorkersService) {
+    constructor(@Inject(TWILIO_TASKROUTER) public readonly twilioTaskrouter, private prisma: PrismaService, private workerService: WorkersService) {
         super(twilioTaskrouter)
     }
 
