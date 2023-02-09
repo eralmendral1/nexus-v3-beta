@@ -20,6 +20,7 @@ import { PusherModule } from './pusher/pusher.module';
 import { CapabilityModule } from './capability/capability.module';
 import { TrackersModule } from './trackers/trackers.module';
 import { WidgetsModule } from './widgets/widgets.module';
+import { ConferenceModule } from './conference/conference.module';
 
 @Module({
     imports: [
@@ -62,7 +63,9 @@ import { WidgetsModule } from './widgets/widgets.module';
 
         TrackersModule,
 
-        WidgetsModule
+        WidgetsModule,
+
+        ConferenceModule
     ],
     providers: [ AzureADStrategy],
 })
