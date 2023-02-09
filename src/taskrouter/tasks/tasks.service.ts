@@ -7,7 +7,7 @@ import { UpdateTaskStatusDto } from './dto/updateTaskStatus.dto'
 export class TasksService extends TaskrouterService {
 
     getAllPendingTasks(): Task[] {
-        return this.twilioClient.tasks.list({ assignmentStatus: "pending" })
+        return this.twilioTaskrouter.tasks.list({ assignmentStatus: "pending" })
     }
 
     private evaluateTaskAttributeFromItems(): string {
@@ -31,7 +31,7 @@ export class TasksService extends TaskrouterService {
 
 
     getMyPendingTasks(): Task[] {
-        return this.twilioClient.tasks.list({
+        return this.twilioTaskrouter.tasks.list({
             assignmentStatus: "pending",
             evaluateTaskAttributes: this.evaluateTaskAttributeFromItems()
         })
@@ -39,21 +39,21 @@ export class TasksService extends TaskrouterService {
 
 
     getMyReservedTasks(): Task[] {
-        return this.twilioClient.tasks.list({
+        return this.twilioTaskrouter.tasks.list({
             assignmentStatus: "reserved",
             evaluateTaskAttributes: this.evaluateTaskAttributeFromItems()
         })
     }
 
     getTaskReservations(taskSid: string): Reservation[] {
-        return this.twilioClient.tasks(taskSid).reservations.list()
+        return this.twilioTaskrouter.tasks(taskSid).reservations.list()
     }
 
     getTask(taskSid: string): Task {
-        return this.twilioClient.tasks(taskSid).fetch()
+        return this.twilioTaskrouter.tasks(taskSid).fetch()
     }
 
     updateTaskStatus(updateTaskStatusDto: UpdateTaskStatusDto): Task {
-        return this.twilioClient.tasks(updateTaskStatusDto.taskSid).update({ assignmentStatus: updateTaskStatusDto.assignmentStatus })
+        return this.twilioTaskrouter.tasks(updateTaskStatusDto.taskSid).update({ assignmentStatus: updateTaskStatusDto.assignmentStatus })
     }
 }

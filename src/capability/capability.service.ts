@@ -12,8 +12,8 @@ import { RemoveWorkerItemsAttributesDto } from '../taskrouter/workers/dto/remove
 
 @Injectable()
 export class CapabilityService extends TaskrouterService {
-    constructor(@Inject(TWILIO_CLIENT) public readonly twilioClient, private prisma: PrismaService, private workerService: WorkersService) {
-        super(twilioClient)
+    constructor(@Inject(TWILIO_CLIENT) public readonly twilioTaskrouter, private prisma: PrismaService, private workerService: WorkersService) {
+        super(twilioTaskrouter)
     }
 
     async addWorkerCapabilities({ userId, workerSid, status, itemIds }: AddWorkerCapabilityDto): Promise<Worker> {

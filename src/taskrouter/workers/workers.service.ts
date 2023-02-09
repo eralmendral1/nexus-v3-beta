@@ -9,23 +9,23 @@ import { RemoveWorkerItemsAttributesDto } from './dto/remove-worker-items-attrib
 export class WorkersService extends TaskrouterService {
 
     getWorkers(): Worker[] {
-        return this.twilioClient.workers.list()
+        return this.twilioTaskrouter.workers.list()
     }
 
 
     getWorker(workerSid: string): Worker {
-        return this.twilioClient.workers(workerSid).fetch()
+        return this.twilioTaskrouter.workers(workerSid).fetch()
     }
 
 
     updateWorkerActivity({ workerSid, activitySid }: UpdateWorkerActivityDto): Worker {
-        return this.twilioClient.workers(workerSid).update({
+        return this.twilioTaskrouter.workers(workerSid).update({
             activitySid
         })
     }
 
     async updateWorkerItemsAttributes({ workerSid, items_capable, items_assigned }: UpdateWorkerItemsAttributesDto): Promise<Worker> {
-        const worker = await this.twilioClient.workers(workerSid).fetch()
+        const worker = await this.twilioTaskrouter.workers(workerSid).fetch()
         let workerAttributes = JSON.parse(worker.attributes)
 
         // Items Capable
@@ -53,13 +53,13 @@ export class WorkersService extends TaskrouterService {
             items_capable: itemsCapableAttribute
         }
 
-        return this.twilioClient.workers(workerSid).update({
+        return this.twilioTaskrouter.workers(workerSid).update({
             attributes: JSON.stringify(workerUpdatedAttributes)
         })
     }
 
     async removeWorkerItemsAttributes({ workerSid, itemIds }: RemoveWorkerItemsAttributesDto): Promise<Worker> {
-        const worker = await this.twilioClient.workers(workerSid).fetch()
+        const worker = await this.twilioTaskrouter.workers(workerSid).fetch()
         let workerAttributes = JSON.parse(worker.attributes)
 
         // Items Capable
@@ -76,7 +76,7 @@ export class WorkersService extends TaskrouterService {
             items_capable: itemsCapableAttribute
         }
 
-        return this.twilioClient.workers(workerSid).update({
+        return this.twilioTaskrouter.workers(workerSid).update({
             attributes: JSON.stringify(workerUpdatedAttributes)
         })
     }

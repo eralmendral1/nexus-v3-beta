@@ -5,6 +5,6 @@ import { TaskrouterService } from '../taskrouter.service'
 @Injectable()
 export class WorkflowsService extends TaskrouterService{
     findAll(): Workflow[] {
-        return this.twilioClient.workflows.list()
+        return this.twilioTaskrouter.workflows.list()
     }
 }

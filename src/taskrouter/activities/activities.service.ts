@@ -5,6 +5,6 @@ import { TaskrouterService } from '../taskrouter.service'
 @Injectable()
 export class ActivitiesService extends TaskrouterService {
     findAll(): Activity[] {
-        return this.twilioClient.activities.list()
+        return this.twilioTaskrouter.activities.list()
     }
 }

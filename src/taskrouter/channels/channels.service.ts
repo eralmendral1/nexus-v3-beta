@@ -6,6 +6,6 @@ import { TaskrouterService } from '../taskrouter.service'
 export class ChannelsService extends TaskrouterService{
 
     findAll(): TaskChannel[] {
-        return this.twilioClient.taskChannels.list()
+        return this.twilioTaskrouter.taskChannels.list()
     }
 }

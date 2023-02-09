@@ -6,6 +6,6 @@ import { TaskrouterService } from '../../taskrouter.service'
 export class ReservationsService extends TaskrouterService {
 
     getWorkerReservations(workerSid: string, status?: string): Reservation[] {
-        return this.twilioClient.workers(workerSid).reservations.list(status ? { "reservationStatus": status } : null)
+        return this.twilioTaskrouter.workers(workerSid).reservations.list(status ? { "reservationStatus": status } : null)
     }
 }
