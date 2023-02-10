@@ -21,6 +21,7 @@ import { CapabilityModule } from './modules/capability/capability.module'
 import { TrackersModule } from './modules/trackers/trackers.module'
 import { WidgetsModule } from './modules/widgets/widgets.module'
 import { ConferenceModule } from './modules/conference/conference.module'
+import { OrderModule } from './modules/order/order.module';
 
 @Module({
     imports: [
@@ -65,7 +66,9 @@ import { ConferenceModule } from './modules/conference/conference.module'
 
         WidgetsModule,
 
-        ConferenceModule
+        ConferenceModule,
+
+        OrderModule
     ],
     providers: [AzureADStrategy],
 })
