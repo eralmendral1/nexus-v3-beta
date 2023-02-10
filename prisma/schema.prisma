@@ -91,7 +91,7 @@ model User {
     updatedAt               DateTime  @updatedAt
     deletedAt               DateTime?
 
-    WorkerCapability WorkerCapability[]
+    capabilities WorkerCapability[]
 
     trackers         UsersOnTrackers[]
     trackerHistories TrackerHistory[]
