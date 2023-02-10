@@ -1,7 +1,10 @@
 import { DynamicModule, Module, Provider } from '@nestjs/common'
 import { TWILIO_CLIENT, TWILIO_TASKROUTER, TWILIO_CONVERSATION } from './constants'
+import { DeviceController } from './device/device.controller';
 
-@Module({})
+@Module({
+  controllers: [DeviceController]
+})
 export class TwilioModule {
     static forRoot(accountSid: string, authToken: string, workspace: string): DynamicModule {
             
