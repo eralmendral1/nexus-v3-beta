@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from '../../prisma/prisma.service'
-import { TrackerHistory } from '../../types'
+import { TrackerHistory } from '@/types'
 import { CreateHistoryDto } from './dto/create-history.dto'
 import { UpdateHistoryDto } from './dto/update-history.dto'
 

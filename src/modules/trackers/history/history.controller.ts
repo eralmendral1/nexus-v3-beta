@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Delete, Param } from '@nestjs/common'
-import { TrackerHistory } from '../../types'
+import { TrackerHistory } from '@/types'
 import { CreateHistoryDto } from './dto/create-history.dto'
 import { UpdateHistoryDto } from './dto/update-history.dto'
 import { HistoryService } from './history.service'

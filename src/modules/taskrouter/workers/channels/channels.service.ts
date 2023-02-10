@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { TaskrouterService } from '@/taskrouter/taskrouter.service'
+import { TaskrouterService } from '@/modules/taskrouter/taskrouter.service'
 import { WorkerChannel } from '@/types'
 import { UpdateWorkerChannelCapacityDto } from './dto/update-worker-channel-capacity.dto'
 import { UpdateWorkerChannelAvailabilityDto } from './dto/update-worker-channel-availability.dto'

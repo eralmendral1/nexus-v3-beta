@@ -18,9 +18,6 @@ export class UsersService {
     findOne(id:number) {
         return this.prisma.user.findFirst({
             where: { id },
-            include: {
-                capabilities: true
-            }
         })
     }
 

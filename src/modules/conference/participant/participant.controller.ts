@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Param, Inject } from '@nestjs/common'
-import { TWILIO_CLIENT } from '@/twilio/constants'
+import { TWILIO_CLIENT } from '@/modules/twilio/constants'
 import { Participant } from '@/types/conference.type'
 import { HoldParticipantDto } from './dto/hold-participant.dto'
 import { MuteParticipantDto } from './dto/mute-participant.dto'

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { TWILIO_TASKROUTER } from '@/twilio/constants'
+import { TWILIO_TASKROUTER } from '@/modules/twilio/constants'
 
 @Injectable()
 export class TaskrouterService {

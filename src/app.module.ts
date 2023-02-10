@@ -1,26 +1,26 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { PusherModule as NestPusher } from 'nestjs-pusher'
-import { PrismaModule } from './prisma/prisma.module'
-import { ClientsModule } from './clients/clients.module'
+import { PrismaModule } from './modules/prisma/prisma.module'
+import { ClientsModule } from './modules/clients/clients.module'
 import { PassportModule } from '@nestjs/passport'
 import { AzureADStrategy } from './azure-ad.guard'
-import { AuthModule } from './auth/auth.module'
-import { UsersModule } from './users/users.module'
-import { ItemsModule } from './items/items.module'
-import { PolicyCategoriesModule } from './policy-categories/policy-categories.module'
-import { PoliciesModule } from './policies/policies.module'
-import { ContactsModule } from './contacts/contacts.module'
-import { DestinationNumbersModule } from './destination-numbers/destination-numbers.module'
-import { TaskrouterModule } from './taskrouter/taskrouter.module';
-import { TwilioModule } from './twilio/twilio.module'
-import { TasksModule } from './tasks/tasks.module';
-import { ChatModule } from './chat/chat.module';
-import { PusherModule } from './pusher/pusher.module';
-import { CapabilityModule } from './capability/capability.module';
-import { TrackersModule } from './trackers/trackers.module';
-import { WidgetsModule } from './widgets/widgets.module';
-import { ConferenceModule } from './conference/conference.module';
+import { AuthModule } from './modules/auth/auth.module'
+import { UsersModule } from './modules/users/users.module'
+import { ItemsModule } from './modules/items/items.module'
+import { PolicyCategoriesModule } from './modules/policy-categories/policy-categories.module'
+import { PoliciesModule } from './modules/policies/policies.module'
+import { ContactsModule } from './modules/contacts/contacts.module'
+import { DestinationNumbersModule } from './modules/destination-numbers/destination-numbers.module'
+import { TaskrouterModule } from './modules/taskrouter/taskrouter.module'
+import { TwilioModule } from './modules/twilio/twilio.module'
+import { TasksModule } from './modules/tasks/tasks.module'
+import { ChatModule } from './modules/chat/chat.module'
+import { PusherModule } from './modules/pusher/pusher.module'
+import { CapabilityModule } from './modules/capability/capability.module'
+import { TrackersModule } from './modules/trackers/trackers.module'
+import { WidgetsModule } from './modules/widgets/widgets.module'
+import { ConferenceModule } from './modules/conference/conference.module'
 
 @Module({
     imports: [
@@ -67,7 +67,7 @@ import { ConferenceModule } from './conference/conference.module';
 
         ConferenceModule
     ],
-    providers: [ AzureADStrategy],
+    providers: [AzureADStrategy],
 })
 
 export class AppModule { }

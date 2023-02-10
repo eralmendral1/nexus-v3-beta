@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common'
-import { TWILIO_CONVERSATION } from '@/twilio/constants'
+import { TWILIO_CONVERSATION } from '@/modules/twilio/constants'
 
 @Injectable()
 export class ChatService {
