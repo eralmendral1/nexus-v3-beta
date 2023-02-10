@@ -22,6 +22,7 @@ import { TrackersModule } from './modules/trackers/trackers.module'
 import { WidgetsModule } from './modules/widgets/widgets.module'
 import { ConferenceModule } from './modules/conference/conference.module'
 import { OrderModule } from './modules/order/order.module';
+import { TaskModule } from './modules/task/task.module';
 
 @Module({
     imports: [
@@ -68,7 +69,9 @@ import { OrderModule } from './modules/order/order.module';
 
         ConferenceModule,
 
-        OrderModule
+        OrderModule,
+
+        TaskModule
     ],
     providers: [AzureADStrategy],
 })
