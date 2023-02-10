@@ -8,52 +8,53 @@ datasource db {
 }
 
 model Client {
-    id                Int                 @id
-    masterClient      Int?
-    name              String
-    email             String?
-    disabled          Boolean             @default(false)
-    address1          String?
-    address2          String?
-    city              String?
-    state             String?
-    zip               String?
-    phone1            String?
-    phone2            String?
-    fax               String?
-    createdAt         DateTime            @default(now())
-    updatedAt         DateTime            @updatedAt
-    PolicyCategory    PolicyCategory[]
-    DestinationNumber DestinationNumber[]
+    id           Int      @id
+    masterClient Int?
+    name         String
+    email        String?
+    disabled     Boolean  @default(false)
+    address1     String?
+    address2     String?
+    city         String?
+    state        String?
+    zip          String?
+    phone1       String?
+    phone2       String?
+    fax          String?
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+
+    policy_categories   PolicyCategory[]
+    destination_numbers DestinationNumber[]
+    orders              Order[]
 
     @@map("clients")
 }
 
 model DestinationNumber {
-    id Int @id @default(autoincrement())
-
+    id        Int      @id @default(autoincrement())
     client_id Int
-    client    Client @relation(fields: [client_id], references: [id])
-
     number    String
     extension String?
     label     String
-
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
+
+    client Client @relation(fields: [client_id], references: [id])
 
     @@map("destination_numbers")
 }
 
 model PolicyCategory {
-    id        Int    @id @default(autoincrement())
+    id        Int      @id @default(autoincrement())
     name      String
     client_id Int
-    client    Client @relation(fields: [client_id], references: [id])
-
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    Policy    Policy[]
+
+    client Client @relation(fields: [client_id], references: [id])
+
+    policies Policy[]
 
     @@map("policy_categories")
 }
@@ -63,9 +64,8 @@ model Policy {
     name        String
     category_id Int
     category    PolicyCategory @relation(fields: [category_id], references: [id])
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    createdAt   DateTime       @default(now())
+    updatedAt   DateTime       @updatedAt
 
     @@map("policies")
 }
@@ -91,17 +91,15 @@ model User {
     updatedAt               DateTime  @updatedAt
     deletedAt               DateTime?
 
-    capabilities WorkerCapability[]
-
-    trackers         UsersOnTrackers[]
-    trackerHistories TrackerHistory[]
+    worker_capabilities WorkerCapability[]
+    trackers            UsersOnTrackers[]
+    tracker_histories   TrackerHistory[]
 
     @@map("users")
 }
 
 model Item {
-    id Int @id @default(autoincrement())
-
+    id                     Int       @id @default(autoincrement())
     client_id              Int
     internal_name          String
     external_name          String
@@ -130,17 +128,16 @@ model Item {
     updatedAt              DateTime  @updatedAt
     deletedAt              DateTime?
 
-    workerCapability WorkerCapability[]
+    worker_capabilities WorkerCapability[]
+    order               Order[]
 
     @@map("items")
 }
 
 model Contact {
-    id Int @id @default(autoincrement())
-
-    number String
-    notes  String?
-
+    id        Int      @id @default(autoincrement())
+    number    String
+    notes     String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
@@ -179,7 +176,6 @@ model Tracker {
 
 model TrackerHistory {
     id        Int      @id @default(autoincrement())
-    user      User     @relation(fields: [user_id], references: [id])
     user_id   Int
     type      String
     worker_id Int?
@@ -187,16 +183,16 @@ model TrackerHistory {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
+    user User @relation(fields: [user_id], references: [id])
+
     @@map("tracker_histories")
 }
 
 model UsersOnTrackers {
-    tracker    Tracker @relation(fields: [tracker_id], references: [id])
+    tracker    Tracker  @relation(fields: [tracker_id], references: [id])
     tracker_id Int
-
-    user    User @relation(fields: [user_id], references: [id])
-    user_id Int
-
+    user       User     @relation(fields: [user_id], references: [id])
+    user_id    Int
     assignedAt DateTime @default(now())
 
     @@id([tracker_id, user_id])
@@ -204,24 +200,66 @@ model UsersOnTrackers {
 }
 
 model Order {
-    id Int @id @default(autoincrement())
+    id             Int       @id @default(autoincrement())
+    item_id        Int
+    client_id      Int
+    status         String?
+    scheduled_time DateTime?
+    target_worker  String?
+    completed_at   DateTime?
+    createdAt      DateTime  @default(now())
+    updatedAt      DateTime  @updatedAt
+    destination    String?
+    DATA1          String?
+    DATA2          String?
+    DATA3          String?
+    DATA4          String?
+    DATA5          String?
+    DATA6          String?
+    DATA7          String?
+    DATA8          String?
+    DATA9          String?
+    DATA10         String?
+    DATA11         String?
+    DATA12         String?
+    DATA13         String?
+    DATA14         String?
+    DATA15         String?
+    DATA16         String?
+    DATA17         String?
+    DATA18         String?
+    DATA19         String?
+    DATA20         String?
+    DATA21         String?
+    DATA22         String?
+    DATA23         String?
+    DATA24         String?
+    DATA25         String?
+    RDATA1         String?
+    RDATA2         String?
+    RDATA3         String?
+    RDATA4         String?
+    RDATA5         String?
+    RDATA6         String?
+    RDATA7         String?
+    RDATA8         String?
+    RDATA9         String?
+    RDATA10        String?
 
+    item   Item   @relation(fields: [item_id], references: [id])
+    client Client @relation(fields: [client_id], references: [id])
 
-
-    tasks           Task[]
-    taskHistories   TaskHistory[]
-    taskCompletions TaskCompletions[]
+    tasks            Task[]
+    task_histories   TaskHistory[]
+    task_completions TaskCompletions[]
 
     @@map("orders")
 }
 
-
-
 model Task {
-    id       Int @id @default(autoincrement())
-    order_id Int
-
-    task_sid                 String  @unique
+    id                       Int               @id @default(autoincrement())
+    order_id                 Int
+    task_sid                 String            @unique
     task_priority            Int
     task_attributes          String?
     task_queue_target_exp    String
@@ -229,59 +267,50 @@ model Task {
     task_queue_name          String?
     task_channel_sid         String
     task_channel_unique_name String
-
-    workflow_sid           String
-    workflow_friendly_name String
-
-    workspace_sid  String
-    workspace_name String?
-    account_sid    String
-    resource_sid   String
-
-    task_queue_entered_date String
-    task_created_date       String
-    timestamp_ms            String?
-    createdAt               DateTime          @default(now())
-    updatedAt               DateTime          @updatedAt
-    order                   Order             @relation(fields: [order_id], references: [id])
-    taskHistories           TaskHistory[]
-    taskCompletions         TaskCompletions[]
+    workflow_sid             String
+    workflow_friendly_name   String
+    workspace_sid            String
+    workspace_name           String?
+    account_sid              String
+    resource_sid             String
+    task_queue_entered_date  String
+    task_created_date        String
+    timestamp_ms             String?
+    createdAt                DateTime          @default(now())
+    updatedAt                DateTime          @updatedAt
+    order                    Order             @relation(fields: [order_id], references: [id])
+    task_histories           TaskHistory[]
+    task_completions         TaskCompletions[]
 
     @@map("tasks")
 }
 
 model TaskHistory {
-    id       Int    @id @default(autoincrement())
-    sid      String
-    order_id Int
-    item_id  Int
-
-    event_type        String
-    event_description String
-
+    id                     Int      @id @default(autoincrement())
+    sid                    String
+    order_id               Int
+    item_id                Int
+    event_type             String
+    event_description      String
     task_sid               String
     task_priority          Int?
     task_attributes        String?
     task_assignment_status String
     task_age               Int
     task_version           String?
-
-    reservation_sid     String?
-    reservation_version String?
-
-    resource_type String?
-    resource_sid  String?
-
-    worker_sid           String?
-    worker_version       String?
-    worker_activity_name String?
-    worker_name          String?
-    worker_attributes    String?
-
-    timestamp_ms String?
-    timestamp    String
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
+    reservation_sid        String?
+    reservation_version    String?
+    resource_type          String?
+    resource_sid           String?
+    worker_sid             String?
+    worker_version         String?
+    worker_activity_name   String?
+    worker_name            String?
+    worker_attributes      String?
+    timestamp_ms           String?
+    timestamp              String
+    createdAt              DateTime @default(now())
+    updatedAt              DateTime @updatedAt
 
     order Order @relation(fields: [order_id], references: [id])
     task  Task  @relation(fields: [task_sid], references: [task_sid])
