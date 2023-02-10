@@ -6,6 +6,7 @@ export class TwilioModule {
     static forRoot(accountSid: string, authToken: string, workspace: string): DynamicModule {
             
         const twilioClient = require('twilio')(accountSid, authToken)
+       
         const twilioClientProvider: Provider = {
             provide: TWILIO_CLIENT,
             useValue: twilioClient

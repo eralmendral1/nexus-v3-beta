@@ -20,7 +20,7 @@ export type Workflow = {
     "taskReservationTimeout": number,
     "workspaceSid": string,
     "url": string,
-    links: WorkflowLinks
+    "links": WorkflowLinks
 }
 
 export type WorkflowLinks = {
@@ -50,6 +50,7 @@ export type TaskChannel = TaskRouterResource & {
     "friendlyName": string,
     "uniqueName": string,
     "channelOptimizedRouting": boolean,
+    "url" : string,
     "links": LinkWorkspace
 }
 
@@ -58,6 +59,7 @@ export type Reservation = TaskRouterResource & {
     "taskSid": string,
     "workerName": string,
     "workerSid": string,
+    "url" : string,
     "links": ReservationLinks
 }
 
@@ -82,6 +84,7 @@ export type Task = TaskRouterResource & {
     "timeout": number,
     "workflowSid": string,
     "workflowFriendlyName": string,
+    "url" : string,
     "links": TaskLinks
 }
 
