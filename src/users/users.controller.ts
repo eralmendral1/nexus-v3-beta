@@ -16,6 +16,19 @@ export class UsersController {
         return this.usersService.create(createUserDto)
     }
 
+    @Get('current')
+    current() {
+        // todo get user id from auth
+        let id = 1
+
+         return this.usersService.findOne(+id)
+    }
+
+    @Get('capability')
+    capabilities() {
+
+    }
+
     @Get()
     findAll() {
         return this.usersService.findAll()
