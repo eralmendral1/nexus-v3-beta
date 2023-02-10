@@ -73,7 +73,7 @@ model Policy {
 model User {
     id                      Int       @id @default(autoincrement())
     callcenter_id           Int?
-    sid                     String?
+    sid                     String?   @unique
     name                    String
     email                   String
     email_verified_at       DateTime?
@@ -178,10 +178,10 @@ model Tracker {
 }
 
 model TrackerHistory {
-    id Int @id @default(autoincrement())
-    user    User   @relation(fields: [user_id], references: [id])
-    user_id Int
-    type    String
+    id        Int      @id @default(autoincrement())
+    user      User     @relation(fields: [user_id], references: [id])
+    user_id   Int
+    type      String
     worker_id Int?
     meta_data String?
     createdAt DateTime @default(now())
@@ -201,4 +201,126 @@ model UsersOnTrackers {
 
     @@id([tracker_id, user_id])
     @@map("tracker_user")
+}
+
+model Order {
+    id Int @id @default(autoincrement())
+
+
+
+    tasks           Task[]
+    taskHistories   TaskHistory[]
+    taskCompletions TaskCompletions[]
+
+    @@map("orders")
+}
+
+
+
+model Task {
+    id       Int @id @default(autoincrement())
+    order_id Int
+
+    task_sid                 String  @unique
+    task_priority            Int
+    task_attributes          String?
+    task_queue_target_exp    String
+    task_queue_sid           String
+    task_queue_name          String?
+    task_channel_sid         String
+    task_channel_unique_name String
+
+    workflow_sid           String
+    workflow_friendly_name String
+
+    workspace_sid  String
+    workspace_name String?
+    account_sid    String
+    resource_sid   String
+
+    task_queue_entered_date String
+    task_created_date       String
+    timestamp_ms            String?
+    createdAt               DateTime          @default(now())
+    updatedAt               DateTime          @updatedAt
+    order                   Order             @relation(fields: [order_id], references: [id])
+    taskHistories           TaskHistory[]
+    taskCompletions         TaskCompletions[]
+
+    @@map("tasks")
+}
+
+model TaskHistory {
+    id       Int    @id @default(autoincrement())
+    sid      String
+    order_id Int
+    item_id  Int
+
+    event_type        String
+    event_description String
+
+    task_sid               String
+    task_priority          Int?
+    task_attributes        String?
+    task_assignment_status String
+    task_age               Int
+    task_version           String?
+
+    reservation_sid     String?
+    reservation_version String?
+
+    resource_type String?
+    resource_sid  String?
+
+    worker_sid           String?
+    worker_version       String?
+    worker_activity_name String?
+    worker_name          String?
+    worker_attributes    String?
+
+    timestamp_ms String?
+    timestamp    String
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+
+    order Order @relation(fields: [order_id], references: [id])
+    task  Task  @relation(fields: [task_sid], references: [task_sid])
+
+    @@map("task_histories")
+}
+
+model TaskCompletions {
+    id         Int     @id @default(autoincrement())
+    order_id   Int
+    item_id    Int
+    task_sid   String
+    worker_id  Int?
+    worker_sid String?
+
+    final_outcome String
+
+    task_time Int
+    wait_time Int
+    talk_time Int
+
+    customer_messages Int?
+    agent_messages    Int?
+    total_messages    Int?
+
+    BillType  String?
+    BillPrice String?
+    BilLQty   String?
+
+    task_created   DateTime
+    task_assigned  DateTime?
+    task_completed DateTime?
+
+    timestamp String?
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    order Order @relation(fields: [order_id], references: [id])
+    task  Task  @relation(fields: [task_sid], references: [task_sid])
+
+    @@map("task_completions")
 }
