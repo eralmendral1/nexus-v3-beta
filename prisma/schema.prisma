@@ -8,22 +8,21 @@ datasource db {
 }
 
 model Client {
-    id           Int      @id
-    masterClient Int?
-    name         String
-    email        String?
-    disabled     Boolean  @default(false)
-    address1     String?
-    address2     String?
-    city         String?
-    state        String?
-    zip          String?
-    phone1       String?
-    phone2       String?
-    fax          String?
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @updatedAt
-
+    id                  Int                 @id
+    masterClient        Int?
+    name                String
+    email               String?
+    disabled            Boolean             @default(false)
+    address1            String?
+    address2            String?
+    city                String?
+    state               String?
+    zip                 String?
+    phone1              String?
+    phone2              String?
+    fax                 String?
+    createdAt           DateTime            @default(now())
+    updatedAt           DateTime            @updatedAt
     policy_categories   PolicyCategory[]
     destination_numbers DestinationNumber[]
     orders              Order[]
@@ -39,8 +38,7 @@ model DestinationNumber {
     label     String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    client Client @relation(fields: [client_id], references: [id])
+    client    Client   @relation(fields: [client_id], references: [id])
 
     @@map("destination_numbers")
 }
@@ -51,10 +49,8 @@ model PolicyCategory {
     client_id Int
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    client Client @relation(fields: [client_id], references: [id])
-
-    policies Policy[]
+    client    Client   @relation(fields: [client_id], references: [id])
+    policies  Policy[]
 
     @@map("policy_categories")
 }
@@ -71,39 +67,38 @@ model Policy {
 }
 
 model User {
-    id                      Int       @id @default(autoincrement())
+    id                      Int                @id @default(autoincrement())
     callcenter_id           Int?
-    sid                     String?   @unique
+    sid                     String?            @unique
     name                    String
     email                   String
     email_verified_at       DateTime?
     avatar                  String?
     password                String?
-    admin                   Boolean   @default(false)
-    external_agent          Boolean   @default(false)
+    admin                   Boolean            @default(false)
+    external_agent          Boolean            @default(false)
     skills                  String?
     timezone                String?
-    block_reject            Boolean   @default(true)
+    block_reject            Boolean            @default(true)
     presence                String?
     reservation_passthrough String?
     remember_token          String?
-    createdAt               DateTime  @default(now())
-    updatedAt               DateTime  @updatedAt
+    createdAt               DateTime           @default(now())
+    updatedAt               DateTime           @updatedAt
     deletedAt               DateTime?
-
-    worker_capabilities WorkerCapability[]
-    trackers            UsersOnTrackers[]
-    tracker_histories   TrackerHistory[]
+    worker_capabilities     WorkerCapability[]
+    trackers                UsersOnTrackers[]
+    tracker_histories       TrackerHistory[]
 
     @@map("users")
 }
 
 model Item {
-    id                     Int       @id @default(autoincrement())
+    id                     Int                @id @default(autoincrement())
     client_id              Int
     internal_name          String
     external_name          String
-    self_init              Boolean   @default(false)
+    self_init              Boolean            @default(false)
     channel_name           String
     channel_id             String
     self_init_workflow     String?
@@ -116,7 +111,7 @@ model Item {
     priority               Int?
     exclude                Boolean?
     timeout                Int?
-    auto_dial              Boolean   @default(true)
+    auto_dial              Boolean            @default(true)
     passthrough_url        String?
     pending_warning_limit  Int?
     pending_danger_limit   Int?
@@ -124,12 +119,11 @@ model Item {
     accepted_danger_limit  Int?
     wrapup_time            Int?
     createdBy              String?
-    createdAt              DateTime  @default(now())
-    updatedAt              DateTime  @updatedAt
+    createdAt              DateTime           @default(now())
+    updatedAt              DateTime           @updatedAt
     deletedAt              DateTime?
-
-    worker_capabilities WorkerCapability[]
-    order               Order[]
+    worker_capabilities    WorkerCapability[]
+    order                  Order[]
 
     @@map("items")
 }
@@ -154,22 +148,20 @@ model WorkerCapability {
     BillRate  String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    user User @relation(fields: [worker_id], references: [id])
-    item Item @relation(fields: [item_id], references: [id])
+    user      User     @relation(fields: [worker_id], references: [id])
+    item      Item     @relation(fields: [item_id], references: [id])
 
     @@map("worker_capabilities")
 }
 
 model Tracker {
-    id          Int      @id @default(autoincrement())
+    id          Int               @id @default(autoincrement())
     name        String
     description String?
     color       String?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-
-    users UsersOnTrackers[]
+    createdAt   DateTime          @default(now())
+    updatedAt   DateTime          @updatedAt
+    users       UsersOnTrackers[]
 
     @@map("trackers")
 }
@@ -182,8 +174,7 @@ model TrackerHistory {
     meta_data String?
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-
-    user User @relation(fields: [user_id], references: [id])
+    user      User     @relation(fields: [user_id], references: [id])
 
     @@map("tracker_histories")
 }
@@ -200,60 +191,113 @@ model UsersOnTrackers {
 }
 
 model Order {
-    id             Int       @id @default(autoincrement())
-    item_id        Int
-    client_id      Int
-    status         String?
-    scheduled_time DateTime?
-    target_worker  String?
-    completed_at   DateTime?
-    createdAt      DateTime  @default(now())
-    updatedAt      DateTime  @updatedAt
-    destination    String?
-    DATA1          String?
-    DATA2          String?
-    DATA3          String?
-    DATA4          String?
-    DATA5          String?
-    DATA6          String?
-    DATA7          String?
-    DATA8          String?
-    DATA9          String?
-    DATA10         String?
-    DATA11         String?
-    DATA12         String?
-    DATA13         String?
-    DATA14         String?
-    DATA15         String?
-    DATA16         String?
-    DATA17         String?
-    DATA18         String?
-    DATA19         String?
-    DATA20         String?
-    DATA21         String?
-    DATA22         String?
-    DATA23         String?
-    DATA24         String?
-    DATA25         String?
-    RDATA1         String?
-    RDATA2         String?
-    RDATA3         String?
-    RDATA4         String?
-    RDATA5         String?
-    RDATA6         String?
-    RDATA7         String?
-    RDATA8         String?
-    RDATA9         String?
-    RDATA10        String?
-
-    item   Item   @relation(fields: [item_id], references: [id])
-    client Client @relation(fields: [client_id], references: [id])
-
+    id               Int               @id @default(autoincrement())
+    item_id          Int
+    client_id        Int
+    status           String?
+    batched          String?
+    bached_id        String?
+    scheduled_time   DateTime?
+    target_worker    String?
+    completed_at     DateTime?
+    createdAt        DateTime          @default(now())
+    updatedAt        DateTime          @updatedAt
+    destination      String?
+    DATA1            String?
+    DATA2            String?
+    DATA3            String?
+    DATA4            String?
+    DATA5            String?
+    DATA6            String?
+    DATA7            String?
+    DATA8            String?
+    DATA9            String?
+    DATA10           String?
+    DATA11           String?
+    DATA12           String?
+    DATA13           String?
+    DATA14           String?
+    DATA15           String?
+    DATA16           String?
+    DATA17           String?
+    DATA18           String?
+    DATA19           String?
+    DATA20           String?
+    DATA21           String?
+    DATA22           String?
+    DATA23           String?
+    DATA24           String?
+    DATA25           String?
+    RDATA1           String?
+    RDATA2           String?
+    RDATA3           String?
+    RDATA4           String?
+    RDATA5           String?
+    RDATA6           String?
+    RDATA7           String?
+    RDATA8           String?
+    RDATA9           String?
+    RDATA10          String?
+    item             Item              @relation(fields: [item_id], references: [id])
+    client           Client            @relation(fields: [client_id], references: [id])
     tasks            Task[]
     task_histories   TaskHistory[]
     task_completions TaskCompletions[]
+    order_histories  OrderHistory[]
 
     @@map("orders")
+}
+
+model OrderHistory {
+    id            Int       @id @default(autoincrement())
+    order_id      Int
+    status        String?
+    target_worker String?
+    batched       String?
+    bached_id     String?
+    last_update   DateTime?
+    completed_at  DateTime?
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+    destination   String?
+    DATA1         String?
+    DATA2         String?
+    DATA3         String?
+    DATA4         String?
+    DATA5         String?
+    DATA6         String?
+    DATA7         String?
+    DATA8         String?
+    DATA9         String?
+    DATA10        String?
+    DATA11        String?
+    DATA12        String?
+    DATA13        String?
+    DATA14        String?
+    DATA15        String?
+    DATA16        String?
+    DATA17        String?
+    DATA18        String?
+    DATA19        String?
+    DATA20        String?
+    DATA21        String?
+    DATA22        String?
+    DATA23        String?
+    DATA24        String?
+    DATA25        String?
+    RDATA1        String?
+    RDATA2        String?
+    RDATA3        String?
+    RDATA4        String?
+    RDATA5        String?
+    RDATA6        String?
+    RDATA7        String?
+    RDATA8        String?
+    RDATA9        String?
+    RDATA10       String?
+    order         Order     @relation(fields: [order_id], references: [id])
+
+    @@map("order_histories")
 }
 
 model Task {
@@ -319,37 +363,30 @@ model TaskHistory {
 }
 
 model TaskCompletions {
-    id         Int     @id @default(autoincrement())
-    order_id   Int
-    item_id    Int
-    task_sid   String
-    worker_id  Int?
-    worker_sid String?
-
-    final_outcome String
-
-    task_time Int
-    wait_time Int
-    talk_time Int
-
+    id                Int       @id @default(autoincrement())
+    order_id          Int
+    item_id           Int
+    task_sid          String
+    worker_id         Int?
+    worker_sid        String?
+    final_outcome     String
+    task_time         Int
+    wait_time         Int
+    talk_time         Int
     customer_messages Int?
     agent_messages    Int?
     total_messages    Int?
-
-    BillType  String?
-    BillPrice String?
-    BilLQty   String?
-
-    task_created   DateTime
-    task_assigned  DateTime?
-    task_completed DateTime?
-
-    timestamp String?
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    order Order @relation(fields: [order_id], references: [id])
-    task  Task  @relation(fields: [task_sid], references: [task_sid])
+    BillType          String?
+    BillPrice         String?
+    BilLQty           String?
+    task_created      DateTime
+    task_assigned     DateTime?
+    task_completed    DateTime?
+    timestamp         String?
+    createdAt         DateTime  @default(now())
+    updatedAt         DateTime  @updatedAt
+    order             Order     @relation(fields: [order_id], references: [id])
+    task              Task      @relation(fields: [task_sid], references: [task_sid])
 
     @@map("task_completions")
 }
