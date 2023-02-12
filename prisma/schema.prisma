@@ -195,8 +195,6 @@ model Order {
     item_id          Int
     client_id        Int
     status           String?
-    batched          String?
-    bached_id        String?
     scheduled_time   DateTime?
     target_worker    String?
     completed_at     DateTime?
