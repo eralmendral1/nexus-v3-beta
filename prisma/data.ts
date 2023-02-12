@@ -303,3 +303,28 @@ export const destinationNumberData =  [
         "label": "AT Sacramento Office",
     }
 ]
+
+export const itemsData = [
+    {
+        id: 1,
+        client_id : 9,
+        internal_name: "Item A",
+        external_name: "Item A",
+        channel_name: "Sample Channel",
+        channel_id : "Sample Channel ID",
+        workflow_id: "Workflow ID",
+        workflow_name: "Worklow Name",
+        template: "Generic Task"
+    },
+    {
+        id: 2,
+        client_id : 38,
+        internal_name: "Item B",
+        external_name: "Item B",
+        channel_name: "Sample Channel",
+        channel_id : "Sample Channel ID",
+        workflow_id: "Workflow ID",
+        workflow_name: "Worklow Name",
+        template: "Generic Task"
+    }
+]
