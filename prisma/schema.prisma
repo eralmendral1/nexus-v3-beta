@@ -251,8 +251,6 @@ model OrderHistory {
     order_id      Int
     status        String?
     target_worker String?
-    batched       String?
-    bached_id     String?
     last_update   DateTime?
     completed_at  DateTime?
     createdAt     DateTime  @default(now())
