@@ -50,8 +50,8 @@ export type Order = {
     status?: string,
     scheduled_time?: Date,
     target_worker?: string,
-    created_at?: Date,
-    updated_at?: Date,
+    createdAt?: Date,
+    updatedAt?: Date,
     completed_at?: Date,
     destination?: string,
     DATA1?: string
