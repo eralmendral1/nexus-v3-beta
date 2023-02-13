@@ -2,10 +2,12 @@ import { Injectable } from '@nestjs/common'
 import { Order } from '@/types'
 import { PrismaService } from '../prisma/prisma.service'
 import { UpdateOrderDto } from './dto/update-order.dto'
+import { EventEmitter2 } from '@nestjs/event-emitter'
+import * as moment from 'moment'
 
 @Injectable()
 export class OrderService {
-    constructor(private prisma: PrismaService) { }
+    constructor(private prisma: PrismaService, private eventEmitter: EventEmitter2) { }
 
     findAll(): Promise<Order[]> {
         return this.prisma.order.findMany()
@@ -23,12 +25,22 @@ export class OrderService {
         })
     }
 
-    create(createOrderDto): Promise<Order> {
-        return this.prisma.order.create({ data: createOrderDto })
+    async create(createOrderDto): Promise<Order> {
+        let order = await this.prisma.order.create({ data: createOrderDto })
+        this.emitCreateOrderHistory(order)
+        return order
     }
 
-    update(id: number, updateOrderDto: UpdateOrderDto) {
-        return this.prisma.order.update({ where: { id }, data: { ...updateOrderDto } })
+    async update(id: number, updateOrderDto: UpdateOrderDto) {
+        let order = await this.prisma.order.update({ where: { id }, data: { ...updateOrderDto } })
+        this.emitCreateOrderHistory(order)
+
+        // emit handle sms received / sms sent
+        // emit handle voice to sms
+        // emit handle intbound to callback
+        // emit handle redis task?
+
+        return order
     }
 
     // todo: from comm server
@@ -43,6 +55,21 @@ export class OrderService {
             where: {
                 id
             }
+        })
+    }
+
+    private emitCreateOrderHistory(payload: Order) {
+
+        // Remove properties not needed for order history coming from order data.
+        let removeProperties = ['item_id', 'client_id', 'createdAt', 'updatedAt', 'deleted_at', 'scheduled_time']
+        removeProperties.forEach((property: string) => {
+            delete payload[property]
+        })
+
+        this.eventEmitter.emit('order-history.create', {
+            ...payload,
+            order_id: payload.id,
+            last_update: payload.updatedAt ?? moment().toISOString()
         })
     }
 }

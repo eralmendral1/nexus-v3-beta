@@ -1,23 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-export class CreateOrderDto {
+
+export class CreateOrderHistoryDto {
     @ApiProperty()
     id: number
 
     @ApiProperty()
-    client_id: number
-
-    @ApiProperty()
-    item_id: number
+    order_id: number
 
     @ApiProperty()
     status?: string
 
     @ApiProperty()
-    scheduled_time?: Date
+    target_worker?: string
 
     @ApiProperty()
-    target_worker?: string
+    last_update?: Date
 
     @ApiProperty()
     destination?: string

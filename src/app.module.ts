@@ -5,6 +5,7 @@ import { PrismaModule } from './modules/prisma/prisma.module'
 import { ClientsModule } from './modules/clients/clients.module'
 import { PassportModule } from '@nestjs/passport'
 import { AzureADStrategy } from './azure-ad.guard'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 import { AuthModule } from './modules/auth/auth.module'
 import { UsersModule } from './modules/users/users.module'
 import { ItemsModule } from './modules/items/items.module'
@@ -27,6 +28,7 @@ import { TaskModule } from './modules/task/task.module'
     imports: [
         // Config Module
         ConfigModule.forRoot({ isGlobal: true }),
+        EventEmitterModule.forRoot(),
 
         // Pusher Module
         NestPusher.forRoot({
