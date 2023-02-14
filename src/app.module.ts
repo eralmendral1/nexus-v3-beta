@@ -23,6 +23,7 @@ import { WidgetsModule } from './modules/widgets/widgets.module'
 import { ConferenceModule } from './modules/conference/conference.module'
 import { OrderModule } from './modules/order/order.module'
 import { TaskModule } from './modules/task/task.module'
+import { AppController } from './app/app.controller';
 
 @Module({
     imports: [
@@ -62,6 +63,7 @@ import { TaskModule } from './modules/task/task.module'
         TaskModule
     ],
     providers: [AzureADStrategy],
+    controllers: [AppController],
 })
 
 export class AppModule { }
