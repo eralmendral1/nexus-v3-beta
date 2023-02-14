@@ -296,6 +296,38 @@ model OrderHistory {
     @@map("order_histories")
 }
 
+model OrderNextItem {
+    id            Int      @id @default(autoincrement())
+    item_id       Int
+    field_name    String
+    trigger_value String
+    next_item     Int
+    new_order     Boolean
+    delay         Int?
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    @@map("order_next_item")
+}
+
+model FieldMapping {
+    id             Int      @id @default(autoincrement())
+    order_field    String
+    friendly_name  String
+    check_dup      Boolean  @default(false)
+    type           String
+    sort          Int?
+    item_id        Int
+    required       Boolean  @default(false)
+    summary        Boolean  @default(false)
+    task_attribute Boolean  @default(false)
+    format         String?
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+
+    @@map("field_mappings")
+}
+
 model Task {
     id                       Int               @id @default(autoincrement())
     order_id                 Int
