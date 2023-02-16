@@ -13,6 +13,6 @@ import { CheckOrderDuplicate } from '@/common/middleware/check-order-duplicate.m
 })
 export class OrderModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
-        consumer.apply(CheckOrderDuplicate).forRoutes({ path: 'orders', method: RequestMethod.POST})
+        // consumer.apply(CheckOrderDuplicate).forRoutes({ path: 'orders', method: RequestMethod.POST})
     }
 }
