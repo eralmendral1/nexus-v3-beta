@@ -90,16 +90,18 @@ export class TaskrouterController {
                 // broadcast to whole
 
                 break
+            default:
+                break
         }
 
         // todo: handle passthrough data
         // <add code here>
 
      
-        // this.eventsService.createTaskRouterEvent(eventData)
-        console.log('debug segmentation fault')
+        this.eventsService.createTaskRouterEvent(eventData)
+        console.log('debug segmentation fault 2')
 
-        return 'callback test 2'
+        return 'callback test 21'
     }
 
     @Post('error')
