@@ -4,7 +4,7 @@ import { PusherService } from 'nestjs-pusher'
 
 @Controller('pusher')
 export class PusherController {
-    constructor(private readonly pusherService: PusherService) {}
+    constructor(private readonly pusherService: PusherService) { }
 
     @Post('channel-existence')
     handleChannelExistenceCallback(@Body() requestBody: Request) {
@@ -34,6 +34,7 @@ export class PusherController {
 
     // **************************** AUTH ENDPOINTS *********************//
 
+    // handle jwt guard token
     @Post('auth/user')
     pusherUserAuth(@Req() req: Request, @Res() res: Response) {
         const socketId = req.body.socket_id
@@ -54,9 +55,11 @@ export class PusherController {
         const socketId = req.body.socket_id
         const channel = req.body.channel_name
 
+        // handle jwt guard token
+
         const pusher = this.pusherService.getPusherInstance()
         const authResponse = pusher.authorizeChannel(socketId, channel)
-        
+
         res.send(authResponse)
     }
 }
