@@ -44,6 +44,8 @@ export type User = {
     deletedAt?: Date
 }
 
+export type OrderStatus = 'T' | 'A' | 'DELETED'
+
 export type Order = {
     id ?: number,
     client_id ?: number,
