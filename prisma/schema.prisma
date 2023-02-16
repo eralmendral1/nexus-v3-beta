@@ -316,7 +316,7 @@ model FieldMapping {
     friendly_name  String
     check_dup      Boolean  @default(false)
     type           String
-    sort          Int?
+    sort           Int?
     item_id        Int
     required       Boolean  @default(false)
     summary        Boolean  @default(false)
@@ -417,4 +417,17 @@ model TaskCompletions {
     task              Task      @relation(fields: [task_sid], references: [task_sid])
 
     @@map("task_completions")
+}
+
+model TaskRouterEvent {
+    id                Int      @id @default(autoincrement())
+    sid               String?
+    resource          String?
+    event_type        String?
+    event_description String?
+    event_data        String?
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+
+    @@map("taskrouter_events")
 }
