@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { Order } from '@/types'
+import { Order, OrderStatus } from '@/types'
 import { PrismaService } from '../prisma/prisma.service'
 import { UpdateOrderDto } from './dto/update-order.dto'
 import { EventEmitter2 } from '@nestjs/event-emitter'
@@ -73,8 +73,13 @@ export class OrderService {
         })
     }
 
-    taskCreated(taskCreatedEventData) {
+    updateOrderStatus(taskCreatedEventData, status: OrderStatus) {
         let id = JSON.parse(taskCreatedEventData.TaskAttributes).OrderID
-        this.prisma.order.update({ where: { id }, data: { status: 'T' } })
+        this.prisma.order.update({ where: { id }, data: { status } })
+    }
+
+
+    checkNextOrder(eventData) {
+        console.log('check next order data:', eventData)
     }
 }

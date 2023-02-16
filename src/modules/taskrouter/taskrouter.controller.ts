@@ -5,13 +5,14 @@ import { OrderService } from '@/modules/order/order.service'
 
 @Controller('taskrouter')
 export class TaskrouterController {
-    constructor( private taskService: TaskService, private orderService: OrderService) { }
+    constructor(private taskService: TaskService, private orderService: OrderService) { }
 
     @Post('callback')
     handleTaskrouterCallback(@Body() eventData: Request) {
         const eventType = eventData['EventType']
 
         switch (eventType) {
+            // ***************************  TASK RESOURCE ******************************** //
 
             case 'task.created':
 
@@ -19,37 +20,76 @@ export class TaskrouterController {
                 this.taskService.createTask(eventData)
 
                 // Create task history record in database.
-                
-                
+                this.taskService.createTaskHistory(eventData)
+
                 // Update order status to 'T'. Means a task is created for the order.
-                this.orderService.taskCreated(eventData)
+                this.orderService.updateOrderStatus(eventData, 'T')
 
-
-                // save task to rediss
-                // handleSMS
-                // broadcast
+                // Todo: Redis | SMS | Braadcast
 
                 break
             case 'task.updated':
+                this.taskService.createTaskHistory(eventData)
 
-
-                break
-
-            case 'task.canceled':
-                //todo create task  completed record.
+                // TODO: Broadcast
                 break
 
             case 'task.wrapup':
+                this.taskService.createTaskHistory(eventData)
                 break
 
             case 'task.completed':
-                // todo: create task completed record.
+                this.taskService.createTaskHistory(eventData)
+
+                this.taskService.completeTask(eventData)
+
+                this.orderService.checkNextOrder(eventData)
+
+                // Todo: Redis complete | Voice Hangup | Broadcast (task.completed)
+
+                break
+
+
+            case 'task.canceled':
+                this.taskService.createTaskHistory(eventData)
+
+                this.orderService.updateOrderStatus(eventData, 'A')
+
+                // Todo:  Task completion
+
+                // Todo: Redis remove | Voice Hangup | Broadcast (task.canceled)
                 break
 
             case 'task.deleted':
+                this.orderService.updateOrderStatus(eventData, 'DELETED')
+
+                // Todo: Redis remove | Voice Hangup | Broadcast (task.deleted)
                 break
 
+            // ***************************  END TASK RESOURCE ******************************** //
+
+            // ***************************  RESERVATION RESOURCE ******************************** //
+            case 'reservation.created':
+                break
+            case 'reservation.accepted':
+                break
+            case 'reservation.timeout':
+            case 'reservation.rescinded':
+            case 'reservation.rejected':
+                break
+                
+            // ***************************  END RESERVATION RESOURCE ******************************** //
+            
+
+            case 'worker.activity.update':
+                // broadcast to worker specific
+                // broadcast to whole
+                
+                break
         }
+
+        // todo: handle passthrough data
+        // todo: save event
 
         return {}
     }
