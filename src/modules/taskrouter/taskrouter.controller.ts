@@ -4,7 +4,9 @@ import { TaskService } from '@/modules/task/task.service'
 import { OrderService } from '@/modules/order/order.service'
 import { EventsService } from './events/events.service'
 import { PusherService } from 'nestjs-pusher'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags("TaskRouter Callbacks")
 @Controller('taskrouter')
 export class TaskrouterController {
 

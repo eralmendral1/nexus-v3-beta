@@ -2,7 +2,9 @@ import { Controller, Get, Param, Post, Body } from '@nestjs/common'
 import { Reservation } from '@/types/taskrouter.type'
 import { ReservationsService } from './reservations.service'
 import { UpdateReservationStatusDto } from './dto/update-reservation-status.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags("TaskRouter Reservation Resource")
 @Controller('taskrouter/reservations')
 export class ReservationsController {
 

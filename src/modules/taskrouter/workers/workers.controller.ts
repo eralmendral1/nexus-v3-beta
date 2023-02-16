@@ -2,7 +2,9 @@ import { Controller, Get, Post, Param, Body } from '@nestjs/common'
 import { Worker } from '@/types'
 import { WorkersService } from './workers.service'
 import { UpdateWorkerActivityDto } from './dto/update-worker-activity.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags("TaskRouter Worker Resource")
 @Controller('taskrouter/workers')
 export class WorkersController {
 

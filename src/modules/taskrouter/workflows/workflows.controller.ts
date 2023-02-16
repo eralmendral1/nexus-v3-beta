@@ -4,7 +4,7 @@ import { ApiTags } from '@nestjs/swagger'
 import { WorkflowsService } from './workflows.service'
 
 
-@ApiTags('Taskrouter Workflows')
+@ApiTags("TaskRouter Workflow Resource")
 @Controller('taskrouter/workflows')
 export class WorkflowsController {
     constructor(private readonly workflowService: WorkflowsService) { }

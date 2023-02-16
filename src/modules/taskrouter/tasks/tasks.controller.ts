@@ -2,7 +2,9 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Task } from '@/types/taskrouter.type'
 import { TasksService } from './tasks.service'
 import { UpdateTaskStatusDto } from './dto/updateTaskStatus.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags("TaskRouter Task Resource")
 @Controller('taskrouter/tasks')
 export class TasksController {
     constructor(private readonly taskService: TasksService) {}
