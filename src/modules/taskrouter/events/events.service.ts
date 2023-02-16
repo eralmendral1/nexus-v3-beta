@@ -20,16 +20,16 @@ export class EventsService {
 
         console.log('debug data:', )
 
-        // let event =  this.prisma.taskRouterEvent.create({
-        //     data: {
-        //         sid: Sid,
-        //         resource: Resource,
-        //         event_type: EventType,
-        //         event_description: EventDescription,
-        //         event_data: JSON.stringify(eventData)
-        //     }
-        // })
+        let event =  this.prisma.taskRouterEvent.create({
+            data: {
+                sid: Sid,
+                resource: Resource,
+                event_type: EventType,
+                event_description: EventDescription,
+                event_data: JSON.stringify(eventData)
+            }
+        })
 
-        console.log('taskrouter event created:', eventData)
+        console.log('taskrouter event created:', eventData, event)
     }
 }
