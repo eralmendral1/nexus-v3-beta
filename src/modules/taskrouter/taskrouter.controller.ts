@@ -3,10 +3,12 @@ import { Request } from 'express'
 import { TaskService } from '@/modules/task/task.service'
 import { OrderService } from '@/modules/order/order.service'
 import { TaskrouterService } from './taskrouter.service'
+import { PrismaService } from '../prisma/prisma.service'
+import { EventsService } from './events/events.service'
 
 @Controller('taskrouter')
 export class TaskrouterController {
-    constructor(private readonly taskrouterService: TaskrouterService, private readonly taskService: TaskService, private readonly orderService: OrderService) { }
+    constructor(private readonly taskService: TaskService, private readonly orderService: OrderService, private eventsService: EventsService) { }
 
     @Post('callback')
     handleTaskrouterCallback(@Body() eventData: Request) {
@@ -84,13 +86,16 @@ export class TaskrouterController {
 
             case 'worker.activity.update':
                 // broadcast to worker specific
+
                 // broadcast to whole
-                this.taskrouterService.createTaskRouterEvent(eventData)
+
                 break
         }
 
         // todo: handle passthrough data
-        // todo: save event
+        // <add code here>
+
+        this.eventsService.createTaskRouterEvent(eventData)
 
         return {}
     }
@@ -102,4 +107,7 @@ export class TaskrouterController {
         // todo: slack alert
         return {}
     }
+
+
+    
 }

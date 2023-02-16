@@ -10,6 +10,7 @@ import { WorkersModule } from './workers/workers.module'
 import { TaskModule } from '@/modules/task/task.module'
 import { OrderModule } from '@/modules/order/order.module'
 import { PrismaModule } from '../prisma/prisma.module'
+import { EventsService } from './events/events.service';
 
 @Module({
     imports: [
@@ -23,7 +24,7 @@ import { PrismaModule } from '../prisma/prisma.module'
         OrderModule,
         PrismaModule
     ],
-    providers: [TaskrouterService],
+    providers: [TaskrouterService, EventsService],
     controllers: [TaskrouterController],
 })
 export class TaskrouterModule { }
