@@ -1,4 +1,5 @@
 export * from './taskrouter.type'
+export * from './taskrouter-callback.type'
 export * from './workers.type'
 export * from './chat.type'
 
