@@ -5,18 +5,19 @@ import { PrismaService } from '@/modules/prisma/prisma.service'
 export class EventsService {
     constructor(private readonly prisma: PrismaService) { }
 
-
-    createTaskRouterEvent(eventData): void {
+    async createTaskRouterEvent(eventData): Promise<void> {
         let { Sid, Resource, EventType, EventDescription } = eventData
 
-        this.prisma.taskRouterEvent.create({
+        let event = await this.prisma.taskRouterEvent.create({
             data: {
                 sid: Sid,
                 resource: Resource,
                 event_type: EventType,
                 event_description: EventDescription,
-                event_data: eventData
+                event_data: JSON.stringify(eventData)
             }
         })
+
+        console.log('taskrouter event created:', event)
     }
 }
