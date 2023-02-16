@@ -3,7 +3,7 @@ import { Reservation } from '@/types'
 import { ReservationsService } from './reservations.service'
 import { ApiTags } from '@nestjs/swagger'
 
-@ApiTags("TaskRouter Worker Reservations Resource")
+@ApiTags("TaskRouter Worker Reservation Resource")
 @Controller('taskrouter/workers/reservations')
 export class ReservationsController {
     constructor(private readonly reservationService: ReservationsService) { }

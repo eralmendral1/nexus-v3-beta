@@ -3,7 +3,7 @@ import { WorkerStatistic } from '@/types'
 import { StatisticsService } from './statistics.service'
 import { ApiTags } from '@nestjs/swagger'
 
-@ApiTags("TaskRouter Worker Statistics Resource")
+@ApiTags("TaskRouter Worker Statistic Resource")
 @Controller('taskrouter/workers/statistics')
 export class StatisticsController {
     constructor(private readonly statisticService: StatisticsService) {}
