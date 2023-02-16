@@ -88,7 +88,7 @@ export class TaskrouterController {
             case 'worker.activity.update':
                 // broadcast to worker specific
                 pusher.sendToUser("1", "worker-activity-update", { 'activitySid': eventData['WorkerActivitySid'] })
-
+                pusher.trigger('private-nexus-channel', 'worker-activity-update',  { 'activitySid': eventData['WorkerActivitySid'] })
 
                 // broadcast to whole
 
