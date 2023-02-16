@@ -33,7 +33,7 @@ export class AuthController {
             }
         }
 
-        const authResponse = this.pusherService.authenticate(socketId, `nexus-channel`, user)
+        const authResponse = this.pusherService.authenticate(socketId, `nexus-channel-dev`, user)
 
         res.send(authResponse)
     }
