@@ -5,6 +5,7 @@ import { OrderService } from '@/modules/order/order.service'
 import { TaskrouterService } from './taskrouter.service'
 import { PrismaService } from '../prisma/prisma.service'
 import { EventsService } from './events/events.service'
+import { pusher } from '@/common/pusher'
 
 @Controller('taskrouter')
 export class TaskrouterController {
@@ -86,6 +87,8 @@ export class TaskrouterController {
 
             case 'worker.activity.update':
                 // broadcast to worker specific
+                pusher.sendToUser("1", "worker-activity-update", { message: "hello" })
+
 
                 // broadcast to whole
 
@@ -109,5 +112,5 @@ export class TaskrouterController {
     }
 
 
-    
+
 }
