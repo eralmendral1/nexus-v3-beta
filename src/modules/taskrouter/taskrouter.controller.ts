@@ -1,18 +1,38 @@
 import { Controller, Post, Body } from '@nestjs/common'
 import { Request } from 'express'
+import { TaskService } from '@/modules/task/task.service'
+import { OrderService } from '@/modules/order/order.service'
 
 @Controller('taskrouter')
 export class TaskrouterController {
-    @Post('callback')
-    handleTaskrouterCallback(@Body() request: Request) {
-        console.log('debug request body:', request)
+    constructor( private taskService: TaskService, private orderService: OrderService) { }
 
-        const eventType = request['EventType']
+    @Post('callback')
+    handleTaskrouterCallback(@Body() eventData: Request) {
+        const eventType = eventData['EventType']
 
         switch (eventType) {
+
             case 'task.created':
+
+                // Create task record in database.
+                this.taskService.createTask(eventData)
+
+                // Create task history record in database.
+                
+                
+                // Update order status to 'T'. Means a task is created for the order.
+                this.orderService.taskCreated(eventData)
+
+
+                // save task to rediss
+                // handleSMS
+                // broadcast
+
                 break
             case 'task.updated':
+
+
                 break
 
             case 'task.canceled':

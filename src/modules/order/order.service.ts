@@ -72,4 +72,9 @@ export class OrderService {
             last_update: payload.updatedAt ?? moment().toISOString()
         })
     }
+
+    taskCreated(taskCreatedEventData) {
+        let id = JSON.parse(taskCreatedEventData.TaskAttributes).OrderID
+        this.prisma.order.update({ where: { id }, data: { status: 'T' } })
+    }
 }

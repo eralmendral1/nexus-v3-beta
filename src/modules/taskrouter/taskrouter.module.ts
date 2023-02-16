@@ -7,6 +7,8 @@ import { ChannelsModule } from './channels/channels.module'
 import { TasksModule } from './tasks/tasks.module'
 import { TaskrouterController } from './taskrouter.controller'
 import { WorkersModule } from './workers/workers.module'
+import { TaskModule } from '@/modules/task/task.module'
+import { OrderModule } from '@/modules/order/order.module'
 
 @Module({
     imports: [
@@ -15,9 +17,11 @@ import { WorkersModule } from './workers/workers.module'
         ActivitiesModule,
         ChannelsModule,
         TasksModule,
-        WorkersModule
+        WorkersModule,
+        TaskModule,
+        OrderModule
     ],
     providers: [TaskrouterService],
-    controllers: [TaskrouterController]
+    controllers: [TaskrouterController],
 })
 export class TaskrouterModule { }

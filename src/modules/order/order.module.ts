@@ -8,7 +8,8 @@ import { CheckOrderDuplicate } from '@/common/middleware/check-order-duplicate.m
 @Module({
   controllers: [OrderController],
   providers: [OrderService, OrderObserverService],
-  imports: [PrismaModule]
+  imports: [PrismaModule],
+  exports: [OrderService]
 })
 export class OrderModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
