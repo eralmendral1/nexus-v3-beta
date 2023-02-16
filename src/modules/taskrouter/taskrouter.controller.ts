@@ -2,10 +2,11 @@ import { Controller, Post, Body } from '@nestjs/common'
 import { Request } from 'express'
 import { TaskService } from '@/modules/task/task.service'
 import { OrderService } from '@/modules/order/order.service'
+import { TaskrouterService } from './taskrouter.service'
 
 @Controller('taskrouter')
 export class TaskrouterController {
-    constructor(private taskService: TaskService, private orderService: OrderService) { }
+    constructor(private readonly taskrouterService: TaskrouterService, private readonly taskService: TaskService, private readonly orderService: OrderService) { }
 
     @Post('callback')
     handleTaskrouterCallback(@Body() eventData: Request) {
@@ -77,14 +78,14 @@ export class TaskrouterController {
             case 'reservation.rescinded':
             case 'reservation.rejected':
                 break
-                
+
             // ***************************  END RESERVATION RESOURCE ******************************** //
-            
+
 
             case 'worker.activity.update':
                 // broadcast to worker specific
                 // broadcast to whole
-                
+                this.taskrouterService.createTaskRouterEvent(eventData)
                 break
         }
 

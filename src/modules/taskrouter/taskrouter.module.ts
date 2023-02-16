@@ -9,6 +9,7 @@ import { TaskrouterController } from './taskrouter.controller'
 import { WorkersModule } from './workers/workers.module'
 import { TaskModule } from '@/modules/task/task.module'
 import { OrderModule } from '@/modules/order/order.module'
+import { PrismaModule } from '../prisma/prisma.module'
 
 @Module({
     imports: [
@@ -19,7 +20,8 @@ import { OrderModule } from '@/modules/order/order.module'
         TasksModule,
         WorkersModule,
         TaskModule,
-        OrderModule
+        OrderModule,
+        PrismaModule
     ],
     providers: [TaskrouterService],
     controllers: [TaskrouterController],
