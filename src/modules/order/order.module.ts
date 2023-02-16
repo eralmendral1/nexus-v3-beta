@@ -11,8 +11,8 @@ import { CheckOrderDuplicate } from '@/common/middleware/check-order-duplicate.m
   imports: [PrismaModule],
   exports: [OrderService]
 })
-export class OrderModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        // consumer.apply(CheckOrderDuplicate).forRoutes({ path: 'orders', method: RequestMethod.POST})
-    }
+export class OrderModule {
+    // configure(consumer: MiddlewareConsumer) {
+    //     // consumer.apply(CheckOrderDuplicate).forRoutes({ path: 'orders', method: RequestMethod.POST})
+    // }
 }

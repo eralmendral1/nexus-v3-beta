@@ -97,7 +97,7 @@ export class TaskrouterController {
 
         this.eventsService.createTaskRouterEvent(eventData)
 
-        return {}
+        return 'callback test'
     }
 
     @Post('error')
