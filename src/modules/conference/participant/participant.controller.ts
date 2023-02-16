@@ -5,7 +5,9 @@ import { HoldParticipantDto } from './dto/hold-participant.dto'
 import { MuteParticipantDto } from './dto/mute-participant.dto'
 import { CoachParticipantDto } from './dto/coach-participant.dto'
 import { CreateParticipantDto } from './dto/create-participant.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags("Conference Participant Resource")
 @Controller('conference')
 export class ParticipantController {
     constructor(@Inject(TWILIO_CLIENT) private readonly twilioClient) { }

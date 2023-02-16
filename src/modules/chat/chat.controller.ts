@@ -1,7 +1,9 @@
 import { Controller, Get, Param } from '@nestjs/common'
 import { Conversation, Message } from '@/types'
 import { ChatService } from './chat.service'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags("Chat Resource")
 @Controller('chat')
 export class ChatController {
     constructor(private chatService: ChatService) { }

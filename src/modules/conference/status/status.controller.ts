@@ -1,5 +1,7 @@
 import { Controller , Post, Body} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags("Call Status Handler")
 @Controller('call')
 export class StatusController {
     

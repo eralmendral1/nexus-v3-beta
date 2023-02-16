@@ -1,7 +1,9 @@
 import { Controller, Get, Param, Inject } from '@nestjs/common'
 import { TWILIO_CLIENT } from '../twilio/constants'
 import { Conference } from '@/types/conference.type'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags("Conference Resource")
 @Controller('conference')
 export class ConferenceController {
     constructor(@Inject(TWILIO_CLIENT) private readonly twilioClient) { }

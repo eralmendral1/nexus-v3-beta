@@ -1,7 +1,9 @@
 import { Controller, Post, Body } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger'
 import { CapabilityTokenDto } from './dto/capability-token.dto'
 const ClientCapability = require('twilio').jwt.ClientCapability;
 
+@ApiTags("Twilio Device")
 @Controller('device')
 export class DeviceController {
 

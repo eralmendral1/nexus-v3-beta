@@ -1,9 +1,11 @@
 import { Controller, Post, Put, Body, HttpCode, HttpStatus } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { CapabilityService } from './capability.service'
 import { AddWorkerCapabilityDto } from './dto/add-worker-capability.dto'
 import { RemoveWorkerCapabilityDto } from './dto/remove-worker-capability.dto'
 import { UpdateWorkerCapabilityDto } from './dto/update-worker-capability.dto'
 
+@ApiTags("Capability")
 @Controller('capability')
 export class CapabilityController {
     constructor(private readonly capabilityService: CapabilityService) { }

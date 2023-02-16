@@ -1,7 +1,9 @@
 import { Controller, Post, Body, Req, Res, } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { Request, Response } from 'express'
 import { PusherService } from 'nestjs-pusher'
 
+@ApiTags("Pusher Callbacks & Auth")
 @Controller('pusher')
 export class PusherController {
     constructor(private readonly pusherService: PusherService) { }
