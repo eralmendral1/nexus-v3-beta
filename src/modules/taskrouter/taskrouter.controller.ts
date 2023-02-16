@@ -5,10 +5,16 @@ import { OrderService } from '@/modules/order/order.service'
 import { TaskrouterService } from './taskrouter.service'
 import { PrismaService } from '../prisma/prisma.service'
 import { EventsService } from './events/events.service'
+import { PusherService } from 'nestjs-pusher'
 
 @Controller('taskrouter')
 export class TaskrouterController {
-    constructor(private readonly taskService: TaskService, private readonly orderService: OrderService, private eventsService: EventsService) { }
+
+
+    constructor(private readonly taskService: TaskService, private readonly orderService: OrderService, private eventsService: EventsService, private pusherService: PusherService) {
+
+
+    }
 
     @Post('callback')
     handleTaskrouterCallback(@Body() eventData: Request) {
@@ -85,10 +91,7 @@ export class TaskrouterController {
 
 
             case 'worker.activity.update':
-                // broadcast to worker specific
-
-                // broadcast to whole
-
+                this.pusherService.trigger('private-nexus-channel', 'worker-activity-update', eventData)
                 break
         }
 
@@ -109,5 +112,5 @@ export class TaskrouterController {
     }
 
 
-    
+
 }
