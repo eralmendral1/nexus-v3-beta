@@ -3,7 +3,6 @@ import { OrderService } from './order.service';
 import { OrderController } from './order.controller';
 import { PrismaModule } from '../prisma/prisma.module'
 import { OrderObserverService } from './order-observer.service'
-import { CheckOrderDuplicate } from '@/common/middleware/check-order-duplicate.middleware'
 
 @Module({
   controllers: [OrderController],
