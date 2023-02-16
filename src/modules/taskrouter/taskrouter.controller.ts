@@ -2,16 +2,19 @@ import { Controller, Post, Body } from '@nestjs/common'
 import { Request } from 'express'
 import { TaskService } from '@/modules/task/task.service'
 import { OrderService } from '@/modules/order/order.service'
-import { TaskrouterService } from './taskrouter.service'
-import { PrismaService } from '../prisma/prisma.service'
 import { EventsService } from './events/events.service'
+import { PusherService } from 'nestjs-pusher'
 
 @Controller('taskrouter')
 export class TaskrouterController {
-    constructor(private readonly taskService: TaskService, private readonly orderService: OrderService, private eventsService: EventsService) { }
+
+    private pusher;
+    constructor(private readonly taskService: TaskService, private readonly orderService: OrderService, private eventsService: EventsService, private pusherService: PusherService) {
+        this.pusher = pusherService.getPusherInstance()
+    }
 
     @Post('callback')
-    handleTaskrouterCallback(@Body() eventData: Request) {
+    async handleTaskrouterCallback(@Body() eventData: Request) {
         const eventType = eventData['EventType']
 
         switch (eventType) {
@@ -85,10 +88,7 @@ export class TaskrouterController {
 
 
             case 'worker.activity.update':
-                // broadcast to worker specific
-
-                // broadcast to whole
-
+                this.pusher.trigger(`privateNexusChannel.${eventData['WorkerSid']}`, eventData['EventType'], eventData)
                 break
         }
 
@@ -107,7 +107,4 @@ export class TaskrouterController {
         // todo: slack alert
         return {}
     }
-
-
-    
 }
