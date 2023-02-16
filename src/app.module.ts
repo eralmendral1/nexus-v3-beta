@@ -36,10 +36,7 @@ import { TaskModule } from './modules/task/task.module'
             appId: process.env.PUSHER_APP_ID,
             secret: process.env.PUSHER_APP_SECRET,
             cluster: process.env.PUSHER_APP_CLUSTER
-        }, {
-            limit: 4000, //4mb
-            enabled: true
-        }, true),
+        },),
         PrismaModule,
         PassportModule,
         AuthModule,
