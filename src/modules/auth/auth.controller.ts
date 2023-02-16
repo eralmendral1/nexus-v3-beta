@@ -15,27 +15,11 @@ import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
 import { AccessTokenGuard, RefreshTokenGuard } from './auth.guard'
 import { ApiTags } from '@nestjs/swagger'
-import { PusherService } from 'nestjs-pusher'
 
 @Controller('auth')
 @ApiTags('Auth')
 export class AuthController {
-    constructor(private authService: AuthService, private pusherService: PusherService) { }
-
-    @Post('/pusher')
-    pusherAuth(@Req() req: Request, @Res() res: Response) {
-        const socketId = req.body.socket_id
-
-        const user = {
-            user_id: "1",
-            user_info: {
-                name: "Neo Anderson"
-            }
-        }
-
-        const authResponse = this.pusherService.authenticate(socketId, 'nexus-channel', user)
-        res.send(authResponse)
-    }
+    constructor(private authService: AuthService) { }
 
     @Post('signup')
     signup(@Body() createUserDto: CreateUserDto) {
