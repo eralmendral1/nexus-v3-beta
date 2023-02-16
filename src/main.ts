@@ -12,9 +12,9 @@ async function bootstrap() {
     // app.setGlobalPrefix('/api/', { exclude: [] });
 
     const config = new DocumentBuilder()
-        .setTitle('Nexus-beta')
-        .setDescription('Nexus API Description')
-        .setVersion('0.1')
+        .setTitle('Nexus API')
+        .setDescription('Nexus API')
+        .setVersion('1')
         .build()
 
     const document = SwaggerModule.createDocument(app, config)
