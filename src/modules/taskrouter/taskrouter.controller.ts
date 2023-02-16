@@ -97,6 +97,7 @@ export class TaskrouterController {
 
      
         // this.eventsService.createTaskRouterEvent(eventData)
+        console.log('debug segmentation fault')
 
         return 'callback test 2'
     }
