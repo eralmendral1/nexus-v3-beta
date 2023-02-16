@@ -91,7 +91,9 @@ export class TaskrouterController {
 
 
             case 'worker.activity.update':
-                this.pusherService.trigger('private-nexus-channel', 'worker-activity-update', eventData)
+                const pusherCh = this.pusherService.getPusherInstance()
+                pusherCh.trigger('private-nexus-channel', eventData['EventType'], eventData)
+
                 break
         }
 
