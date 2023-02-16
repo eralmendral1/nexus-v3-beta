@@ -96,9 +96,9 @@ export class TaskrouterController {
         // <add code here>
 
      
-        this.eventsService.createTaskRouterEvent(eventData)
+        // this.eventsService.createTaskRouterEvent(eventData)
 
-        return 'callback test 1'
+        return 'callback test 2'
     }
 
     @Post('error')
