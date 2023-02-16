@@ -13,7 +13,7 @@ export class PusherController {
 
     @Post('presence')
     handlePresenceCallback(@Body() requestBody: Request) {
-
+        return 1
     }
 
     @Post('client-events')
@@ -30,7 +30,6 @@ export class PusherController {
     handleCacheChannelsEvents() {
 
     }
-
 
     // **************************** AUTH ENDPOINTS *********************//
 
@@ -51,13 +50,16 @@ export class PusherController {
     }
 
     @Post('auth/channel')
+    // pusherChannelAuth() {
     pusherChannelAuth(@Req() req: Request, @Res() res: Response) {
         const socketId = req.body.socket_id
+        console.log("🚀 ~ file: pusher.controller.ts:56 ~ pusherChannelAuth ~ socketId", socketId)
         const channel = req.body.channel_name
+        console.log("🚀 ~ file: pusher.controller.ts:57 ~ pusherChannelAuth ~ channel", channel)
 
         // handle jwt guard token
-
         const pusher = this.pusherService.getPusherInstance()
+        console.log("🚀 ~ file: pusher.controller.ts:60 ~ pusherChannelAuth ~ pusher", pusher)
         const authResponse = pusher.authorizeChannel(socketId, channel)
 
         res.send(authResponse)
