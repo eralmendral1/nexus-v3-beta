@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Patch, Delete, Param, Body } from '@nestjs/common'
-import { Order } from '@/types'
+import { Controller, Get, Post, Patch, Delete, Param, Query, Body } from '@nestjs/common'
+import { Order, PaginatedOrder, PaginateQuery } from '@/types'
 import { CreateOrderDto } from './dto/create-order.dto'
 import { OrderService } from './order.service'
 import { UpdateOrderDto } from './dto/update-order.dto'
@@ -11,8 +11,8 @@ export class OrderController {
     constructor(private readonly orderService: OrderService) { }
 
     @Get('')
-    findAll(): Promise<Order[]> {
-        return this.orderService.findAll()
+    findAll(@Query() query: PaginateQuery): Promise<PaginatedOrder> {
+        return this.orderService.findAll(query)
     }
 
     @Get(':id')

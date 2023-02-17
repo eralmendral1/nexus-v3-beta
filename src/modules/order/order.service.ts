@@ -1,16 +1,17 @@
 import { Injectable } from '@nestjs/common'
-import { Order, OrderStatus } from '@/types'
+import { Order, OrderStatus, PaginatedOrder, PaginateQuery } from '@/types'
 import { PrismaService } from '../prisma/prisma.service'
 import { UpdateOrderDto } from './dto/update-order.dto'
 import { EventEmitter2 } from '@nestjs/event-emitter'
 import * as moment from 'moment'
+import { paginateResource } from '@/common/utils/paginate'
 
 @Injectable()
 export class OrderService {
     constructor(private prisma: PrismaService, private eventEmitter: EventEmitter2) { }
 
-    findAll(): Promise<Order[]> {
-        return this.prisma.order.findMany()
+    async findAll(query: PaginateQuery): Promise<PaginatedOrder> {
+        return await paginateResource(this.prisma.order, query)
     }
 
     findOne(id: number): Promise<Order> {
