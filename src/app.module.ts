@@ -1,5 +1,5 @@
-import { Module } from '@nestjs/common'
-import { APP_GUARD } from '@nestjs/core'
+import { Module, CacheModule, CacheInterceptor } from '@nestjs/common'
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
 import { ConfigModule } from '@nestjs/config'
 import { PusherModule as NestPusher } from 'nestjs-pusher'
 import { PrismaModule } from './modules/prisma/prisma.module'
@@ -25,6 +25,8 @@ import { ConferenceModule } from './modules/conference/conference.module'
 import { OrderModule } from './modules/order/order.module'
 import { TaskModule } from './modules/task/task.module'
 import { AccessTokenGuard } from './common/guards'
+import type { RedisClientOptions } from 'redis'
+let redisStore = require('cache-manager-redis-store');
 
 @Module({
     imports: [
@@ -42,6 +44,17 @@ import { AccessTokenGuard } from './common/guards'
             limit: 4000, //4mb
             enabled: true
         }, true),
+
+        CacheModule.register<RedisClientOptions>({
+            store: redisStore,
+            socket : {
+                host: process.env.REDIS_HOST, 
+                port: +process.env.REDIS_PORT,
+            },
+            password: process.env.REDIS_PASSWORD,
+            ttl: 5000  // 5seconds
+        }),
+
         PrismaModule,
         PassportModule,
         AuthModule,
@@ -63,10 +76,18 @@ import { AccessTokenGuard } from './common/guards'
         OrderModule,
         TaskModule
     ],
-    providers: [AzureADStrategy, {
-        provide: APP_GUARD,
-        useClass: AccessTokenGuard
-    }]
+    providers: [
+        AzureADStrategy,
+        {
+            provide: APP_GUARD,
+            useClass: AccessTokenGuard
+        },
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: CacheInterceptor
+        }
+
+    ]
 })
 
 export class AppModule { }

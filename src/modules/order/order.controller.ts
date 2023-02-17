@@ -12,6 +12,7 @@ export class OrderController {
 
     @Get('')
     findAll(@Query() query: PaginateQuery): Promise<PaginatedOrder> {
+        console.log('debug get orders')
         return this.orderService.findAll(query)
     }
 
