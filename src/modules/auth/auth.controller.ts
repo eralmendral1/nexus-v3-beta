@@ -13,35 +13,22 @@ import { Request, Response } from 'express'
 import { CreateUserDto } from '@/modules/users/dto/create-user.dto'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
-import { AccessTokenGuard, RefreshTokenGuard } from './auth.guard'
+import { AccessTokenGuard, RefreshTokenGuard } from '@/common/guards'
 import { ApiTags } from '@nestjs/swagger'
 import { PusherService } from 'nestjs-pusher'
-
-@Controller('auth')
+import { GetCurrentUser, GetCurrentUserId, Public } from '@/common/decorators'
 @ApiTags('Auth')
+@Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService, private pusherService: PusherService) { }
 
-    @Post('/pusher')
-    pusherAuth(@Req() req: Request, @Res() res: Response) {
-        const socketId = req.body.socket_id
-
-        const user = {
-            user_id: "1",
-            user_info: {
-                name: "Neo Anderson"
-            }
-        }
-
-        const authResponse = this.pusherService.authenticate(socketId, 'nexus-channel', user)
-        res.send(authResponse)
-    }
-
+    @Public()
     @Post('signup')
     signup(@Body() createUserDto: CreateUserDto) {
         return this.authService.signUp(createUserDto)
     }
 
+    @Public()
     @Post('signin')
     signin(@Body() data: AuthDto) {
         return this.authService.signIn(data)
@@ -49,15 +36,14 @@ export class AuthController {
 
     @UseGuards(AccessTokenGuard)
     @Get('logout')
-    logout(@Req() req: Request) {
-        this.authService.logout(req.user['sub'])
+    logout(@GetCurrentUserId() userId: number) {
+        this.authService.logout(userId)
     }
 
+    @Public()
     @UseGuards(RefreshTokenGuard)
-    @Get('refresh')
-    refreshTokens(@Req() req: Request) {
-        const userId = req.user['sub']
-        const refreshToken = req.user['refreshToken']
+    @Post('refresh')
+    refreshTokens(@GetCurrentUserId() userId: number, @GetCurrentUser('refreshToken') refreshToken: string) {
         return this.authService.refreshTokens(userId, refreshToken)
     }
 

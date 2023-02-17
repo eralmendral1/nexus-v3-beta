@@ -1,5 +1,5 @@
 import { ValidationPipe } from '@nestjs/common'
-import { NestFactory } from '@nestjs/core'
+import { NestFactory, Reflector } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 
@@ -8,8 +8,6 @@ async function bootstrap() {
     app.setGlobalPrefix('api/')
     app.enableCors()
     app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues : false }))
-
-    // app.setGlobalPrefix('/api/', { exclude: [] });
 
     const config = new DocumentBuilder()
         .setTitle('Nexus API')

@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common'
+import { APP_GUARD } from '@nestjs/core'
 import { ConfigModule } from '@nestjs/config'
 import { PusherModule as NestPusher } from 'nestjs-pusher'
 import { PrismaModule } from './modules/prisma/prisma.module'
@@ -23,6 +24,7 @@ import { WidgetsModule } from './modules/widgets/widgets.module'
 import { ConferenceModule } from './modules/conference/conference.module'
 import { OrderModule } from './modules/order/order.module'
 import { TaskModule } from './modules/task/task.module'
+import { AccessTokenGuard } from './common/guards'
 
 @Module({
     imports: [
@@ -61,7 +63,10 @@ import { TaskModule } from './modules/task/task.module'
         OrderModule,
         TaskModule
     ],
-    providers: [AzureADStrategy]
+    providers: [AzureADStrategy, {
+        provide: APP_GUARD,
+        useClass: AccessTokenGuard
+    }]
 })
 
 export class AppModule { }

@@ -32,6 +32,7 @@ export class AuthService {
             ...createUserDto,
             password: hash,
         })
+
         const tokens = await this.getTokens(newUser.id, newUser.email)
         await this.updateRefreshToken(newUser.id, tokens.refreshToken)
         return tokens
@@ -96,16 +97,18 @@ export class AuthService {
     }
 
     async refreshTokens(userId: number, refreshToken: string) {
-        const user = await this.usersService.findById(userId);
+        const user = await this.usersService.findById(userId)
         if (!user || !user.remember_token)
-          throw new ForbiddenException();
+            throw new ForbiddenException()
+
         const refreshTokenMatches = await argon2.verify(
-          user.remember_token,
-          refreshToken,
-        );
-        if (!refreshTokenMatches) throw new ForbiddenException('Access Denied');
-        const tokens = await this.getTokens(user.id, user.email);
-        await this.updateRefreshToken(user.id, tokens.refreshToken);
-        return tokens;
-      }
+            user.remember_token,
+            refreshToken,
+        )
+
+        if (!refreshTokenMatches) throw new ForbiddenException('Access Denied')
+        const tokens = await this.getTokens(user.id, user.email)
+        await this.updateRefreshToken(user.id, tokens.refreshToken)
+        return tokens
+    }
 }

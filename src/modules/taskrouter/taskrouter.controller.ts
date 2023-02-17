@@ -4,6 +4,7 @@ import { TaskService } from '@/modules/task/task.service'
 import { OrderService } from '@/modules/order/order.service'
 import { EventsService } from './events/events.service'
 import { PusherService } from 'nestjs-pusher'
+import { Public } from '@/common/decorators'
 import { ApiTags } from '@nestjs/swagger'
 
 @ApiTags("TaskRouter Callbacks")
@@ -15,6 +16,7 @@ export class TaskrouterController {
         this.pusher = pusherService.getPusherInstance()
     }
 
+    @Public()
     @Post('callback')
     async handleTaskrouterCallback(@Body() eventData: Request) {
         const eventType = eventData['EventType']
