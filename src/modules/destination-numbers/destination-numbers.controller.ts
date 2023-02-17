@@ -1,13 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger'
-import { AccessTokenGuard } from '../auth/auth.guard'
 import { DestinationNumbersService } from './destination-numbers.service';
 import { CreateDestinationNumberDto } from './dto/create-destination-number.dto';
 import { UpdateDestinationNumberDto } from './dto/update-destination-number.dto';
 
-@Controller('destination-numbers')
 @ApiTags('Destination Numbers')
-@UseGuards(AccessTokenGuard)
+@Controller('destination-numbers')
 export class DestinationNumbersController {
   constructor(private readonly destinationNumbersService: DestinationNumbersService) {}
 

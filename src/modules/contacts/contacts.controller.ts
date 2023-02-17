@@ -1,13 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { AccessTokenGuard } from '../auth/auth.guard'
 import { ContactsService } from './contacts.service'
 import { CreateContactDto } from './dto/create-contact.dto'
 import { UpdateContactDto } from './dto/update-contact.dto'
 
-@Controller('contacts')
 @ApiTags('Contact Notes')
-@UseGuards(AccessTokenGuard)
+@Controller('contacts')
 export class ContactsController {
     constructor(private readonly contactsService: ContactsService) { }
 

@@ -3,11 +3,9 @@ import { ClientsService } from './clients.service'
 import { CreateClientDto } from './dto/create-client.dto'
 import { UpdateClientDto } from './dto/update-client.dto'
 import { ApiTags } from '@nestjs/swagger'
-import { AccessTokenGuard } from '../auth/auth.guard'
 
 @Controller('clients')
 @ApiTags('Clients')
-@UseGuards(AccessTokenGuard)
 export class ClientsController {
     constructor(private readonly clientsService: ClientsService) { }
 

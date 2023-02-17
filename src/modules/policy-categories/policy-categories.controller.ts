@@ -3,11 +3,9 @@ import { PolicyCategoriesService } from './policy-categories.service'
 import { CreatePolicyCategoryDto } from './dto/create-policy-category.dto'
 import { UpdatePolicyCategoryDto } from './dto/update-policy-category.dto'
 import { ApiTags } from '@nestjs/swagger'
-import { AccessTokenGuard } from '../auth/auth.guard'
 
-@Controller('policy-categories')
 @ApiTags('Client Policy Categories')
-@UseGuards(AccessTokenGuard)
+@Controller('policy-categories')
 export class PolicyCategoriesController {
     constructor(private readonly policyCategoriesService: PolicyCategoriesService) { }
 

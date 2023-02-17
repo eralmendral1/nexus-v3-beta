@@ -3,11 +3,9 @@ import { PoliciesService } from './policies.service';
 import { CreatePolicyDto } from './dto/create-policy.dto';
 import { UpdatePolicyDto } from './dto/update-policy.dto';
 import { ApiTags } from '@nestjs/swagger'
-import { AccessTokenGuard } from '../auth/auth.guard'
 
-@Controller('policies')
 @ApiTags('Client Policies')
-@UseGuards(AccessTokenGuard)
+@Controller('policies')
 export class PoliciesController {
   constructor(private readonly policiesService: PoliciesService) {}
 
