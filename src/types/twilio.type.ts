@@ -5,8 +5,6 @@ export type TwilioResource = {
     "sid": string,
 }
 
-
-
 export type TwilioResourceApiVersion = {
     "accountSid": string,
     "dateCreated": string,

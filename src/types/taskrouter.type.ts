@@ -94,3 +94,94 @@ type TaskLinks = {
     "workspace": string,
     "workflow": string
 }
+
+export type Worker = TaskRouterResource & {
+    "activityName": string,
+    "activitySid": string,
+    "attributes": string,
+    "available": string,
+    "dateStatusChanged": string,
+    "friendlyName": string,
+    "links": WorkerLinks
+}
+
+type WorkerLinks = {
+    "cumulative_statistics": string,
+    "reservations": string,
+    "real_time_statistics": string,
+    "statistics": string,
+    "worker_channels": string,
+    "channels": string,
+    "worker_statistics": string,
+    "workspace": string,
+    "activity": string
+}
+
+export type WorkerStatistic = {
+    "accountSid": string,
+    "cumulative": CumulativeStatistics,
+    "workerSid": string,
+    "workerspaceSid": string,
+    "url": string
+}
+
+type CumulativeStatistics = {
+    "reservations_timed_out": number,
+    "reservations_rejected": number,
+    "reservations_created": number,
+    "reservations_rescinded": number,
+    "tasks_assigned": number,
+    "start_time": string,
+    "reservations_wrapup": number,
+    "end_time": string,
+    "reservations_accepted": number,
+    "activity_durations": ActivityDuration[]
+}
+
+type ActivityDuration = {
+    "avg": number,
+    "min": number,
+    "max": number,
+    "friendly_name": string,
+    "sid": string,
+    "total": number
+}
+
+export type WorkerChannel = TaskRouterResource & {
+    "assignedTasks": number,
+    "available": boolean,
+    "availableCapacityPercentage": number,
+    "configuredCapacity": number,
+    "taskChannelSid": string,
+    "taskChannelUniqueName": string,
+    "workerSid": string
+}
+
+export type TaskEvent = {
+    "TaskPriority": string,
+    "EventType": string,
+    "WorkflowName": string,
+    "Timestamp": string,
+    "TaskAge": string,
+    "TaskAssignmentStatus": string,
+    "TaskAttributes": string,
+    "TaskVersion": string,
+    "TaskChannelUniqueName": string,
+    "WorkspaceName": string,
+    "OperatingUnitSid": string,
+    "TaskChannelSid": string,
+    "TaskQueueEnteredDate": string,
+    "TaskDateCreated": string,
+    "ResourceType": string,
+    "TaskQueueName": string,
+    "WorkflowSid": string,
+    "AccountSid": string,
+    "Sid": string,
+    "TimestampMs": string,
+    "TaskQueueTargetExpression": string,
+    "WorkspaceSid": string,
+    "TaskQueueSid": string,
+    "EventDescription": string,
+    "TaskSid": string,
+    "ResourceSid": string,
+}

@@ -1,7 +1,8 @@
+import { PaginationMetaType } from './paginate.type'
+
 export * from './taskrouter.type'
-export * from './taskrouter-callback.type'
-export * from './workers.type'
 export * from './chat.type'
+export * from './paginate.type'
 
 export type Tracker = {
     id: number,
@@ -92,5 +93,10 @@ export type Order = {
     RDATA8?: string
     RDATA9?: string
     RDATA10?: string
+}
+
+export type PaginatedOrder = {
+    data: Order[],
+    meta: PaginationMetaType
 }
 
